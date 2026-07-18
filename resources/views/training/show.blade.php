@@ -55,6 +55,25 @@
                     </div>
                 @endif
 
+                <!-- Pricing Tiers -->
+                <div class="mb-8">
+                    <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-4">Choose Your Frequency</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        @foreach($program->getPricingTiers() as $tier)
+                            <a href="{{ route('training.book', ['program' => $program, 'sessions' => $tier['sessions']]) }}"
+                               class="group relative border border-gray-200 rounded-xl p-4 hover:border-brand hover:shadow-lg hover:shadow-black/5 transition-all text-center
+                                      {{ $tier['sessions'] == 1 ? 'border-brand shadow-md shadow-black/5' : '' }}">
+                                @if(isset($tier['save']))
+                                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-brand text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">Save {{ $tier['save'] }}%</span>
+                                @endif
+                                <p class="text-[13px] font-bold uppercase mb-1">{{ $tier['label'] }}</p>
+                                <p class="text-2xl font-extrabold">${{ number_format($tier['price'], 2) }}</p>
+                                <p class="text-[11px] text-gray-400 mt-1">/ session</p>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+
                 @if($program->long_description)
                     <div class="text-[14px] text-gray-500 leading-relaxed mb-8">
                         {!! $program->long_description !!}
@@ -79,7 +98,7 @@
                             <div class="p-5">
                                 <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">{{ $rp->typeLabel() }}</span>
                                 <h3 class="text-[15px] font-bold uppercase mt-1 mb-1">{{ $rp->title }}</h3>
-                                <span class="text-[14px] font-extrabold">${{ number_format($rp->price, 2) }}</span>
+                                <span class="text-[14px] font-extrabold">From ${{ number_format($rp->price, 2) }}</span>
                             </div>
                         </a>
                     @endforeach

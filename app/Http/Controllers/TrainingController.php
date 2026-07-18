@@ -36,7 +36,12 @@ class TrainingController extends Controller
             'customer_email' => 'required|email',
             'preferred_date' => 'required|date|after:today',
             'preferred_time' => 'required|string',
+            'sessions_per_week' => 'required|integer|in:1,2,3,5',
         ]);
+
+        $sessions = (int) $request->sessions_per_week;
+        $total = $program->calculateTotal($sessions);
+        $frequencyLabel = $sessions . 'x per week';
 
         Booking::create([
             'booking_number' => 'YBS-BK-' . strtoupper(Str::random(8)),
@@ -48,7 +53,10 @@ class TrainingController extends Controller
             'message' => $request->get('message'),
             'preferred_date' => $request->preferred_date,
             'preferred_time' => $request->preferred_time,
-            'total' => $program->price,
+            'frequency' => $frequencyLabel,
+            'sessions_per_week' => $sessions,
+            'price_per_session' => $total,
+            'total' => $total,
         ]);
 
         return redirect()->route('training.booked')

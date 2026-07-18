@@ -23,23 +23,47 @@
             <div>
                 <p class="text-[11px] text-gray-400 uppercase tracking-wider">{{ $program->typeLabel() }}</p>
                 <h2 class="text-xl font-bold uppercase">{{ $program->title }}</h2>
-                <p class="text-[14px] font-extrabold mt-1">${{ number_format($program->price, 2) }} @if($program->duration) <span class="text-gray-400 font-normal text-[12px]">/ {{ $program->duration }}</span> @endif</p>
+                <p class="text-[14px] font-extrabold mt-1" id="totalPrice">${{ number_format($program->price, 2) }}</p>
             </div>
         </div>
 
         <form action="{{ route('training.book.submit', $program) }}" method="POST">
             @csrf
             <div class="space-y-6">
+
+                <!-- Frequency Selection -->
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-3">Training Frequency *</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        @foreach($program->getPricingTiers() as $tier)
+                            <label class="frequency-option group relative border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-gray-400 transition-all text-center
+                                        {{ (request('sessions', 1) == $tier['sessions']) ? 'border-brand shadow-md' : '' }}"
+                                   data-sessions="{{ $tier['sessions'] }}" data-price="{{ $tier['price'] }}">
+                                @if(isset($tier['save']))
+                                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-brand text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">Save {{ $tier['save'] }}%</span>
+                                @endif
+                                <input type="radio" name="sessions_per_week" value="{{ $tier['sessions'] }}"
+                                       class="hidden" {{ request('sessions', 1) == $tier['sessions'] ? 'checked' : '' }}>
+                                <p class="text-[13px] font-bold uppercase mb-1">{{ $tier['label'] }}</p>
+                                <p class="text-xl font-extrabold">${{ number_format($tier['price'], 2) }}</p>
+                                <p class="text-[11px] text-gray-400 mt-1">/ session</p>
+                            </label>
+                        @endforeach
+                    </div>
+                    <input type="hidden" name="frequency" id="frequencyInput" value="{{ request('sessions', 1) . 'x per week' }}">
+                    @error('sessions_per_week') <p class="text-red-500 text-[12px] mt-1.5">{{ $message }}</p> @enderror
+                </div>
+
                 <div>
                     <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Full Name *</label>
-                    <input type="text" name="customer_name" value="{{ old('customer_name') }}" required
+                    <input type="text" name="customer_name" value="{{ old('customer_name', auth()->user()->name ?? '') }}" required
                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                     @error('customer_name') <p class="text-red-500 text-[12px] mt-1.5">{{ $message }}</p> @enderror
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                         <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Email *</label>
-                        <input type="email" name="customer_email" value="{{ old('customer_email') }}" required
+                        <input type="email" name="customer_email" value="{{ old('customer_email', auth()->user()->email ?? '') }}" required
                             class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                         @error('customer_email') <p class="text-red-500 text-[12px] mt-1.5">{{ $message }}</p> @enderror
                     </div>
@@ -51,7 +75,7 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Preferred Date *</label>
+                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Preferred Start Date *</label>
                         <input type="date" name="preferred_date" value="{{ old('preferred_date') }}" required
                             min="{{ now()->addDay()->format('Y-m-d') }}"
                             class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
@@ -61,6 +85,8 @@
                         <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Preferred Time *</label>
                         <select name="preferred_time" required class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                             <option value="">Select time</option>
+                            <option value="06:00 AM" {{ old('preferred_time') == '06:00 AM' ? 'selected' : '' }}>6:00 AM</option>
+                            <option value="07:00 AM" {{ old('preferred_time') == '07:00 AM' ? 'selected' : '' }}>7:00 AM</option>
                             <option value="08:00 AM" {{ old('preferred_time') == '08:00 AM' ? 'selected' : '' }}>8:00 AM</option>
                             <option value="09:00 AM" {{ old('preferred_time') == '09:00 AM' ? 'selected' : '' }}>9:00 AM</option>
                             <option value="10:00 AM" {{ old('preferred_time') == '10:00 AM' ? 'selected' : '' }}>10:00 AM</option>
@@ -91,5 +117,28 @@
         </form>
     </div>
 </section>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const options = document.querySelectorAll('.frequency-option');
+    const frequencyInput = document.getElementById('frequencyInput');
+    const totalPrice = document.getElementById('totalPrice');
+    const sessionsLabels = { 1: '1x per week', 2: '2x per week', 3: '3x per week', 5: '5x per week' };
+
+    options.forEach(option => {
+        option.addEventListener('click', function() {
+            options.forEach(o => o.classList.remove('border-brand', 'shadow-md'));
+            this.classList.add('border-brand', 'shadow-md');
+            this.querySelector('input[type="radio"]').checked = true;
+            const sessions = this.dataset.sessions;
+            const price = this.dataset.price;
+            frequencyInput.value = sessionsLabels[sessions] || sessions + 'x per week';
+            totalPrice.textContent = '$' + parseFloat(price).toFixed(2);
+        });
+    });
+});
+</script>
+@endpush
 
 @endsection

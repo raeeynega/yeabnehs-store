@@ -69,4 +69,26 @@ class TrainingProgram extends Model
             default => $this->type,
         };
     }
+
+    public function getPricingTiers(): array
+    {
+        $base = $this->price;
+        return [
+            ['sessions' => 1, 'label' => '1x per week', 'price' => $base, 'per' => 'session'],
+            ['sessions' => 2, 'label' => '2x per week', 'price' => round($base * 1.8, 2), 'per' => 'session', 'save' => round((1 - ($base * 1.8) / ($base * 2)) * 100)],
+            ['sessions' => 3, 'label' => '3x per week', 'price' => round($base * 2.5, 2), 'per' => 'session', 'save' => round((1 - ($base * 2.5) / ($base * 3)) * 100)],
+            ['sessions' => 5, 'label' => '5x per week', 'price' => round($base * 3.8, 2), 'per' => 'session', 'save' => round((1 - ($base * 3.8) / ($base * 5)) * 100)],
+        ];
+    }
+
+    public function calculateTotal(int $sessionsPerWeek): float
+    {
+        $tiers = $this->getPricingTiers();
+        foreach ($tiers as $tier) {
+            if ($tier['sessions'] === $sessionsPerWeek) {
+                return $tier['price'];
+            }
+        }
+        return $this->price;
+    }
 }
