@@ -12,7 +12,7 @@
             Train With The Best
         </h1>
         <p class="text-gray-400 text-lg max-w-xl mx-auto font-light">
-            Personalized calisthenics coaching tailored to your goals. 1-on-1 sessions, group classes, and online programs available.
+            Personalized fitness coaching tailored to your goals. 1-on-1 sessions, group classes, and online programs available.
         </p>
     </div>
 </section>

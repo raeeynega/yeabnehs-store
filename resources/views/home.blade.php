@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'YeaBneh Store - Premium Calisthenics Gear')
+@section('title', 'YeaBneh Store - Premium Fitness Gear')
 
 @section('content')
 
@@ -41,13 +41,13 @@
             <span class="mx-10 text-accent">&#9679;</span>
             <span class="mx-10 text-white/40">Unmatched Gear Quality</span>
             <span class="mx-10 text-accent">&#9679;</span>
-            <span class="mx-10 text-white/40">#1 Global Calisthenics Movement</span>
+            <span class="mx-10 text-white/40">#1 Global Fitness Movement</span>
             <span class="mx-10 text-accent">&#9679;</span>
             <span class="mx-10 text-white/40">Built for Performance</span>
             <span class="mx-10 text-accent">&#9679;</span>
             <span class="mx-10 text-white/40">Unmatched Gear Quality</span>
             <span class="mx-10 text-accent">&#9679;</span>
-            <span class="mx-10 text-white/40">#1 Global Calisthenics Movement</span>
+            <span class="mx-10 text-white/40">#1 Global Fitness Movement</span>
         </div>
     </div>
 </div>

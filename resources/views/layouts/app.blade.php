@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', config('app.name') . ' - Premium Calisthenics Gear')</title>
+    <title>@yield('title', config('app.name') . ' - Premium Fitness Gear')</title>
     <meta name="description" content="@yield('description', 'Premium weight vests, parallettes, resistance bands, and training apparel designed for peak performance.')">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,7 +85,7 @@
                 <span class="mx-10 text-accent">&#9679;</span>
                 <span class="mx-10 opacity-70">Unmatched Gear Quality</span>
                 <span class="mx-10 text-accent">&#9679;</span>
-                <span class="mx-10 opacity-70">#1 Global Calisthenics Movement</span>
+                <span class="mx-10 opacity-70">#1 Global Fitness Movement</span>
                 <span class="mx-10 text-accent">&#9679;</span>
                 <span class="mx-10 opacity-70">Free Shipping Over $100</span>
                 <span class="mx-10 text-accent">&#9679;</span>
@@ -93,7 +93,7 @@
                 <span class="mx-10 text-accent">&#9679;</span>
                 <span class="mx-10 opacity-70">Unmatched Gear Quality</span>
                 <span class="mx-10 text-accent">&#9679;</span>
-                <span class="mx-10 opacity-70">#1 Global Calisthenics Movement</span>
+                <span class="mx-10 opacity-70">#1 Global Fitness Movement</span>
                 <span class="mx-10 text-accent">&#9679;</span>
                 <span class="mx-10 opacity-70">Free Shipping Over $100</span>
             </div>
@@ -267,7 +267,7 @@
                         <span class="text-2xl font-extrabold tracking-[-0.04em] uppercase">YeaBneh</span>
                     </a>
                     <p class="text-gray-500 text-[13px] leading-relaxed max-w-xs mb-8">
-                        Premium calisthenics gear designed for athletes who demand the best. Train anywhere, conquer everything.
+                        Premium fitness gear designed for athletes who demand the best. Train anywhere, conquer everything.
                     </p>
                     <div class="flex items-center gap-5">
                         <a href="#" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:bg-white hover:text-brand transition-all duration-300">

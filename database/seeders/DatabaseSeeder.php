@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Categories
-        $equipment = Category::create(['name' => 'Equipment', 'slug' => 'equipment', 'description' => 'Elite calisthenics equipment', 'type' => 'equipment', 'is_featured' => true, 'sort_order' => 1]);
+        $equipment = Category::create(['name' => 'Equipment', 'slug' => 'equipment', 'description' => 'Elite fitness equipment', 'type' => 'equipment', 'is_featured' => true, 'sort_order' => 1]);
         $apparel = Category::create(['name' => 'Apparel', 'slug' => 'apparel', 'description' => 'Training apparel for men and women', 'type' => 'apparel', 'is_featured' => true, 'sort_order' => 2]);
         $accessories = Category::create(['name' => 'Accessories', 'slug' => 'accessories', 'description' => 'Essential training accessories', 'type' => 'accessories', 'is_featured' => true, 'sort_order' => 3]);
         $mens = Category::create(['name' => 'Men', 'slug' => 'men', 'description' => 'Men\'s collection', 'type' => 'apparel', 'is_featured' => true, 'sort_order' => 4]);
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($products as $i => $data) {
             $data['slug'] = Str::slug($data['name']);
-            $data['description'] = '<p>Premium quality calisthenics gear designed for peak performance. Built to last with the highest quality materials.</p>';
+            $data['description'] = '<p>Premium quality fitness gear designed for peak performance. Built to last with the highest quality materials.</p>';
             $data['stock'] = rand(10, 100);
             $data['sort_order'] = $i;
             $product = Product::create($data);
@@ -100,12 +100,12 @@ class DatabaseSeeder extends Seeder
         // Courses
         $coursesData = [
             [
-                'title' => 'Calisthenics Fundamentals',
-                'description' => 'Master the basics of calisthenics. Learn proper form for push-ups, pull-ups, dips, and squats. Perfect for beginners.',
-                'long_description' => '<p>This comprehensive beginner course covers everything you need to start your calisthenics journey. From perfect push-up form to your first pull-up, every movement is broken down step by step.</p><p>You\'ll build a solid foundation of strength and technique that will prepare you for more advanced skills.</p>',
+                'title' => 'Fitness Fundamentals',
+                'description' => 'Master the basics of fitness training. Learn proper form for push-ups, pull-ups, dips, and squats. Perfect for beginners.',
+                'long_description' => '<p>This comprehensive beginner course covers everything you need to start your fitness journey. From perfect push-up form to your first pull-up, every movement is broken down step by step.</p><p>You\'ll build a solid foundation of strength and technique that will prepare you for more advanced skills.</p>',
                 'level' => 'beginner', 'duration_weeks' => 4, 'lessons_count' => 12, 'price' => 49.99, 'is_featured' => true,
                 'lessons' => [
-                    ['title' => 'Introduction to Calisthenics', 'description' => 'What is calisthenics and why it works', 'duration_minutes' => 15],
+                    ['title' => 'Introduction to Fitness Training', 'description' => 'What is fitness training and why it works', 'duration_minutes' => 15],
                     ['title' => 'Perfect Push-Up Form', 'description' => 'Master the fundamental push-up', 'duration_minutes' => 20],
                     ['title' => 'Pull-Up Progressions', 'description' => 'From dead hangs to full pull-ups', 'duration_minutes' => 25],
                     ['title' => 'Dip Technique', 'description' => 'Parallel bar dips explained', 'duration_minutes' => 20],
@@ -122,7 +122,7 @@ class DatabaseSeeder extends Seeder
             [
                 'title' => 'Handstand Mastery',
                 'description' => 'Progress from wall handstands to freestanding. Build the strength, balance, and confidence for a perfect handstand.',
-                'long_description' => '<p>The handstand is one of the most iconic calisthenics skills. This course takes you from zero to a freestanding handstand with structured progressions.</p><p>Learn the exact drills, strength exercises, and balance techniques used by world-class gymnasts.</p>',
+                'long_description' => '<p>The handstand is one of the most iconic fitness skills. This course takes you from zero to a freestanding handstand with structured progressions.</p><p>Learn the exact drills, strength exercises, and balance techniques used by world-class athletes.</p>',
                 'level' => 'intermediate', 'duration_weeks' => 6, 'lessons_count' => 18, 'price' => 79.99, 'compare_at_price' => 99.99, 'is_featured' => true,
                 'lessons' => [
                     ['title' => 'Handstand Anatomy', 'description' => 'Understanding the mechanics', 'duration_minutes' => 15],
@@ -135,7 +135,7 @@ class DatabaseSeeder extends Seeder
             [
                 'title' => 'Muscle-Up Blueprint',
                 'description' => 'The complete guide to achieving your first muscle-up and beyond. Covers both bar and ring muscle-ups.',
-                'long_description' => '<p>The muscle-up is the ultimate upper body skill in calisthenics. This course provides a step-by-step roadmap to achieving your first one.</p><p>From explosive pull-ups to the transition technique, every component is trained systematically.</p>',
+                'long_description' => '<p>The muscle-up is the ultimate upper body skill in fitness training. This course provides a step-by-step roadmap to achieving your first one.</p><p>From explosive pull-ups to the transition technique, every component is trained systematically.</p>',
                 'level' => 'advanced', 'duration_weeks' => 8, 'lessons_count' => 24, 'price' => 99.99, 'is_featured' => true,
                 'lessons' => [
                     ['title' => 'Muscle-Up Prerequisites', 'description' => 'Strength requirements and self-assessment', 'duration_minutes' => 12],
@@ -174,7 +174,7 @@ class DatabaseSeeder extends Seeder
         $trainingData = [
             [
                 'title' => '1-on-1 Elite Coaching',
-                'description' => 'Fully personalized calisthenics coaching tailored to your specific goals. Get undivided attention and custom programming.',
+                'description' => 'Fully personalized fitness coaching tailored to your specific goals. Get undivided attention and custom programming.',
                 'long_description' => '<p>Our elite 1-on-1 coaching is designed for athletes who want maximum results. Every session is customized to your level, goals, and schedule.</p><p>Your coach will assess your current abilities, identify weaknesses, and create a clear path to your goals.</p>',
                 'type' => '1-on-1', 'duration' => '60 min', 'max_participants' => 1, 'price' => 89.99,
                 'features' => json_encode(['Personalized workout plan', 'Form correction & feedback', 'Progress tracking', 'Nutrition guidance', 'Direct messaging with coach']),
@@ -196,14 +196,14 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'title' => 'Beginner Foundations',
-                'description' => 'Never done calisthenics before? This is for you. Build the basics with expert guidance in a supportive environment.',
+                'description' => 'New to fitness training? This is for you. Build the basics with expert guidance in a supportive environment.',
                 'type' => 'group', 'duration' => '60 min', 'max_participants' => 8, 'price' => 35.00,
                 'features' => json_encode(['No experience needed', 'Learn fundamental movements', 'Build baseline strength', 'Supportive group setting', 'Technique-focused coaching']),
                 'sort_order' => 4,
             ],
             [
                 'title' => 'Competition Prep',
-                'description' => 'Preparing for a calisthenics competition? Get specialized coaching for holds, combos, and routines.',
+                'description' => 'Preparing for a fitness competition? Get specialized coaching for holds, combos, and routines.',
                 'type' => '1-on-1', 'duration' => '90 min', 'max_participants' => 1, 'price' => 120.00,
                 'features' => json_encode(['Routine choreography', 'Hold optimization', 'Presentation coaching', 'Mock competitions', 'Peaking strategy']),
                 'sort_order' => 5,

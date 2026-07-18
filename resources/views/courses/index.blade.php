@@ -9,7 +9,7 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10 text-center">
         <p class="text-accent text-[11px] font-bold uppercase tracking-[0.3em] mb-4">YeaBneh Academy</p>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-[-0.02em] text-white mb-6">
-            Master Calisthenics
+            Master Your Training
         </h1>
         <p class="text-gray-400 text-lg max-w-xl mx-auto font-light">
             Structured courses designed to take you from beginner to advanced. Learn proper form, build strength, and unlock skills.
