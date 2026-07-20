@@ -34,7 +34,10 @@ COPY --from=frontend /app/public/build /var/www/yeabnehs-store/public/build
 RUN composer dump-autoload --optimize \
     && composer install --no-dev --optimize-autoloader
 
-# Storage permissions
+# Make entrypoint executable
+RUN chmod +x entrypoint.sh
+
+# Create storage directories
 RUN mkdir -p storage/framework/{cache,sessions,testing,views} \
     && mkdir -p storage/logs \
     && mkdir -p bootstrap/cache \
@@ -42,4 +45,4 @@ RUN mkdir -p storage/framework/{cache,sessions,testing,views} \
 
 EXPOSE 8000
 
-CMD php artisan migrate --force; php artisan serve --host=0.0.0.0 --port=8000
+CMD ["./entrypoint.sh"]
