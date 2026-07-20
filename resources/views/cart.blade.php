@@ -6,7 +6,7 @@
 
 <section class="py-16">
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10">
-        <h1 class="text-3xl lg:text-4xl font-extrabold uppercase tracking-[-0.02em] mb-10">Shopping Cart</h1>
+        <h1 class="text-3xl lg:text-4xl font-extrabold uppercase tracking-[-0.02em] mb-10">የግዢ ጋርዣ</h1>
 
         @if(!empty($products))
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -31,7 +31,7 @@
                                         <form action="{{ route('cart.remove') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="slug" value="{{ $slug }}">
-                                            <button type="submit" class="text-[11px] text-gray-400 hover:text-red-600 uppercase tracking-[0.15em] font-medium transition">Remove</button>
+                                            <button type="submit" class="text-[11px] text-gray-400 hover:text-red-600 uppercase tracking-[0.15em] font-medium transition">ያስወግዱ</button>
                                         </form>
                                     </div>
                                 </div>
@@ -45,27 +45,27 @@
 
                 <div class="lg:col-span-1">
                     <div class="bg-surface-muted p-7 rounded-xl sticky top-24">
-                        <h2 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-6">Order Summary</h2>
+                        <h2 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-6">የትዕዛዝ ማጠቃለያ</h2>
                         <div class="space-y-3 text-[14px]">
                             <div class="flex justify-between">
-                                <span class="text-gray-500">Subtotal</span>
+                                <span class="text-gray-500">አጠቃላይ</span>
                                 <span class="font-bold">${{ number_format($subtotal, 2) }}</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-gray-500">Shipping</span>
-                                <span class="font-bold">{{ $subtotal >= 100 ? 'Free' : '$9.99' }}</span>
+                                <span class="text-gray-500">መላኪያ</span>
+                                <span class="font-bold">{{ $subtotal >= 100 ? 'ነፃ' : '$9.99' }}</span>
                             </div>
                             <div class="h-px bg-gray-200 my-2"></div>
                             <div class="flex justify-between text-lg">
-                                <span class="font-bold">Total</span>
+                                <span class="font-bold">ጠቅላላ</span>
                                 <span class="font-extrabold">${{ number_format($subtotal + ($subtotal >= 100 ? 0 : 9.99), 2) }}</span>
                             </div>
                         </div>
                         <a href="{{ route('checkout') }}" class="block mt-6 btn-primary py-4 text-center text-[12px] font-bold uppercase tracking-[0.15em]">
-                            Proceed to Checkout
+                            ክፍያ ይፈጽኑ
                         </a>
                         <a href="{{ route('shop.index') }}" class="block mt-3 text-center text-[13px] text-gray-400 hover:text-brand transition">
-                            Continue Shopping
+                            ማገኛ ማግኘት ይቀጥሉ
                         </a>
                     </div>
                 </div>
@@ -73,8 +73,8 @@
         @else
             <div class="text-center py-24">
                 <svg class="w-16 h-16 mx-auto text-gray-200 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                <p class="text-xl text-gray-400 mb-6">Your cart is empty</p>
-                <a href="{{ route('shop.index') }}" class="btn-primary inline-block px-10 py-4 text-[12px] font-bold uppercase tracking-[0.15em]">Start Shopping</a>
+                <p class="text-xl text-gray-400 mb-6">ጋርዣዎ ባዶ ነው</p>
+                <a href="{{ route('shop.index') }}" class="btn-primary inline-block px-10 py-4 text-[12px] font-bold uppercase tracking-[0.15em]">ግዢ ይጀምሩ</a>
             </div>
         @endif
     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Personal Training - YeaBneh Store')
+@section('title', 'ሰነፍ ስልጠና - YeaBneh Store')
 
 @section('content')
 
@@ -51,7 +51,7 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10">
         @if($programs->count())
             <div class="mb-12">
-                <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em]">Available Programs</h2>
+                <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em]">ተመዝግቦ ያለዎት ፕሮግራሞች</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -98,8 +98,8 @@
                                     @endif
                                 </div>
                                 <a href="{{ route('training.show', $program) }}" class="btn-primary px-6 py-3 text-[11px] font-bold uppercase tracking-[0.12em]">
-                                    Book Now
-                                </a>
+            አሁን ይያዙ
+        </a>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
             </div>
         @else
             <div class="text-center py-24">
-                <p class="text-xl text-gray-400">Training programs coming soon.</p>
+                <p class="text-xl text-gray-400">ስልጠና ፕሮግራሞች በቅርቡ ይመጣሉ።</p>
             </div>
         @endif
     </div>

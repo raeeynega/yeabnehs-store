@@ -7,13 +7,13 @@
 <section class="py-16">
     <div class="max-w-2xl mx-auto px-5">
         <nav class="text-[11px] text-gray-400 mb-10 uppercase tracking-[0.15em] font-medium">
-            <a href="{{ route('home') }}" class="hover:text-brand transition">Home</a>
+            <a href="{{ route('home') }}" class="hover:text-brand transition">ዋና ገጽ</a>
             <span class="mx-2.5 text-gray-300">/</span>
-            <a href="{{ route('training.index') }}" class="hover:text-brand transition">Training</a>
+            <a href="{{ route('training.index') }}" class="hover:text-brand transition">ስልጠና</a>
             <span class="mx-2.5 text-gray-300">/</span>
             <a href="{{ route('training.show', $program) }}" class="hover:text-brand transition">{{ $program->title }}</a>
             <span class="mx-2.5 text-gray-300">/</span>
-            <span class="text-brand">Book</span>
+            <span class="text-brand">ቦታ ማስያዣ</span>
         </nav>
 
         <div class="bg-surface-muted p-8 mb-8 flex items-center gap-5">
@@ -33,7 +33,7 @@
 
                 <!-- Frequency Selection -->
                 <div>
-                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-3">Training Frequency *</label>
+                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-3">ስልጠና ድግරታ *</label>
                     <div class="grid grid-cols-2 gap-3">
                         @foreach($program->getPricingTiers() as $tier)
                             <label class="frequency-option group relative border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-gray-400 transition-all text-center
@@ -55,36 +55,36 @@
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Full Name *</label>
+                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">ሙሉ ስም *</label>
                     <input type="text" name="customer_name" value="{{ old('customer_name', auth()->user()->name ?? '') }}" required
                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                     @error('customer_name') <p class="text-red-500 text-[12px] mt-1.5">{{ $message }}</p> @enderror
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Email *</label>
+                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">ኢሜይል *</label>
                         <input type="email" name="customer_email" value="{{ old('customer_email', auth()->user()->email ?? '') }}" required
                             class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                         @error('customer_email') <p class="text-red-500 text-[12px] mt-1.5">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Phone</label>
+                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">ስልክ</label>
                         <input type="text" name="customer_phone" value="{{ old('customer_phone') }}"
                             class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                     </div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Preferred Start Date *</label>
+                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">የመጀመሪያ ቀን *</label>
                         <input type="date" name="preferred_date" value="{{ old('preferred_date') }}" required
                             min="{{ now()->addDay()->format('Y-m-d') }}"
                             class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                         @error('preferred_date') <p class="text-red-500 text-[12px] mt-1.5">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Preferred Time *</label>
+                        <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">የተመረጠ ሰዓት *</label>
                         <select name="preferred_time" required class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
-                            <option value="">Select time</option>
+                            <option value="">ሰዓት ይምረጡ</option>
                             <option value="06:00 AM" {{ old('preferred_time') == '06:00 AM' ? 'selected' : '' }}>6:00 AM</option>
                             <option value="07:00 AM" {{ old('preferred_time') == '07:00 AM' ? 'selected' : '' }}>7:00 AM</option>
                             <option value="08:00 AM" {{ old('preferred_time') == '08:00 AM' ? 'selected' : '' }}>8:00 AM</option>
@@ -103,16 +103,16 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Message (optional)</label>
+                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">መልዕክት (አማራጭ)</label>
                     <textarea name="message" rows="3"
                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors placeholder:text-gray-400"
-                        placeholder="Tell us about your goals, experience level, or any questions...">{{ old('message') }}</textarea>
+                        placeholder="ስለ ተGGLEዎችዎ, የተሞከረ ደረጃ, ወይም ማንኛውም ጥያቄዎች ይንግሩን...">{{ old('message') }}</textarea>
                 </div>
 
                 <button type="submit" class="w-full btn-primary py-4 text-[12px] font-bold uppercase tracking-[0.15em]">
-                    Submit Booking Request
+                    የቦታ ማስያዣ ጥያቄ ያስፈልጉ
                 </button>
-                <p class="text-center text-[12px] text-gray-400">We'll confirm your booking within 24 hours via email.</p>
+                <p class="text-center text-[12px] text-gray-400">በ24 ሰዓት ውስጥ በኢሜይል የቦታ ማስያዣዎን እናረጋግጣለን።</p>
             </div>
         </form>
     </div>

@@ -81,21 +81,21 @@
     <div class="bg-brand text-white overflow-hidden">
         <div class="py-2.5">
             <div class="animate-marquee whitespace-nowrap inline-block text-[11px] font-medium tracking-[0.25em] uppercase">
-                <span class="mx-10 opacity-70">Built for Performance</span>
+                <span class="mx-10 opacity-70">ለአፈፃፀም የተሰራ</span>
                 <span class="mx-10 text-accent">&#9679;</span>
-                <span class="mx-10 opacity-70">Unmatched Gear Quality</span>
+                <span class="mx-10 opacity-70">ያልተመሳሰለ መሳሪያ ጥራት</span>
                 <span class="mx-10 text-accent">&#9679;</span>
-                <span class="mx-10 opacity-70">#1 Global Fitness Movement</span>
+                <span class="mx-10 opacity-70">#1 ዓለም አቀፍ የቅርጽ እንቅስቃሴ</span>
                 <span class="mx-10 text-accent">&#9679;</span>
-                <span class="mx-10 opacity-70">Free Shipping Over $100</span>
+                <span class="mx-10 opacity-70">ከ$100 በላይ ነፃ መላኪያ</span>
                 <span class="mx-10 text-accent">&#9679;</span>
-                <span class="mx-10 opacity-70">Built for Performance</span>
+                <span class="mx-10 opacity-70">ለአፈፃፀም የተሰራ</span>
                 <span class="mx-10 text-accent">&#9679;</span>
-                <span class="mx-10 opacity-70">Unmatched Gear Quality</span>
+                <span class="mx-10 opacity-70">ያልተመሳሰለ መሳሪያ ጥራት</span>
                 <span class="mx-10 text-accent">&#9679;</span>
-                <span class="mx-10 opacity-70">#1 Global Fitness Movement</span>
+                <span class="mx-10 opacity-70">#1 ዓለም አቀፍ የቅርጽ እንቅስቃሴ</span>
                 <span class="mx-10 text-accent">&#9679;</span>
-                <span class="mx-10 opacity-70">Free Shipping Over $100</span>
+                <span class="mx-10 opacity-70">ከ$100 በላይ ነፃ መላኪያ</span>
             </div>
         </div>
     </div>
@@ -116,12 +116,12 @@
 
                 <!-- Desktop Nav -->
                 <nav class="hidden lg:flex items-center space-x-8 text-[12px] font-semibold uppercase tracking-[0.15em]">
-                    <a href="{{ route('shop.index') }}" class="hover:opacity-50 transition-opacity duration-200">Shop All</a>
-                    <a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="hover:opacity-50 transition-opacity duration-200">Equipment</a>
-                    <a href="{{ route('shop.index', ['category' => 'apparel']) }}" class="hover:opacity-50 transition-opacity duration-200">Apparel</a>
-                    <a href="{{ route('courses.index') }}" class="hover:opacity-50 transition-opacity duration-200">Courses</a>
-                    <a href="{{ route('training.index') }}" class="hover:opacity-50 transition-opacity duration-200">Training</a>
-                    <a href="{{ route('shop.index', ['clearance' => 1]) }}" class="hover:opacity-50 transition-opacity duration-200 text-red-600">Sale</a>
+                    <a href="{{ route('shop.index') }}" class="hover:opacity-50 transition-opacity duration-200">ሁሉንም ይገበያዩ</a>
+                    <a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="hover:opacity-50 transition-opacity duration-200">መሳሪያዎች</a>
+                    <a href="{{ route('shop.index', ['category' => 'apparel']) }}" class="hover:opacity-50 transition-opacity duration-200">አልባሶች</a>
+                    <a href="{{ route('courses.index') }}" class="hover:opacity-50 transition-opacity duration-200">ኮርሶች</a>
+                    <a href="{{ route('training.index') }}" class="hover:opacity-50 transition-opacity duration-200">ስልጠና</a>
+                    <a href="{{ route('shop.index', ['clearance' => 1]) }}" class="hover:opacity-50 transition-opacity duration-200 text-red-600">ሽያጭ</a>
                 </nav>
 
                 <!-- Right Icons -->
@@ -168,39 +168,39 @@
             </div>
             <div class="p-6 border-b border-gray-100">
                 <form action="{{ route('shop.index') }}" method="GET" class="relative">
-                    <input type="text" name="search" placeholder="Search products..." class="w-full border border-gray-200 rounded-xl px-4 py-3 pl-10 text-[13px] focus:outline-none focus:border-brand transition-colors">
+                    <input type="text" name="search" placeholder="ምርቶችን ፈልግ..." class="w-full border border-gray-200 rounded-xl px-4 py-3 pl-10 text-[13px] focus:outline-none focus:border-brand transition-colors">
                     <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </form>
             </div>
             <nav class="flex-1 overflow-y-auto p-6 space-y-0.5">
                 <a href="{{ route('home') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition">
                     <svg class="w-[18px] h-[18px] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                    Home
+                    ዋና ገጽ
                 </a>
                 <a href="{{ route('shop.index') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition">
                     <svg class="w-[18px] h-[18px] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                    Shop All
+                    ሁሉንም ይገበያዩ
                 </a>
                 <a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="flex items-center gap-3 py-3 pl-[34px] text-[12px] font-medium text-gray-500 hover:text-black transition">
-                    Equipment
+                    መሳሪያዎች
                 </a>
                 <a href="{{ route('shop.index', ['category' => 'apparel']) }}" class="flex items-center gap-3 py-3 pl-[34px] text-[12px] font-medium text-gray-500 hover:text-black transition">
-                    Apparel
+                    አልባሶች
                 </a>
                 <a href="{{ route('shop.index', ['clearance' => 1]) }}" class="flex items-center gap-3 py-3 pl-[34px] text-[12px] font-medium text-red-500 hover:text-red-700 transition">
-                    Sale
+                    ሽያጭ
                 </a>
                 <a href="{{ route('courses.index') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition">
                     <svg class="w-[18px] h-[18px] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                    Courses
+                    ኮርሶች
                 </a>
                 <a href="{{ route('training.index') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition">
                     <svg class="w-[18px] h-[18px] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    Training
+                    ስልጠና
                 </a>
                 <a href="{{ route('cart.index') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition">
                     <svg class="w-[18px] h-[18px] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
-                    Cart
+                    ጋርዣ
                     @php $cartCount = array_sum(session()->get('cart', [])); @endphp
                     @if($cartCount > 0)
                         <span class="ml-auto bg-brand text-white text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">{{ $cartCount }}</span>
@@ -210,29 +210,29 @@
                 @auth
                     <a href="{{ route('account') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition">
                         <svg class="w-[18px] h-[18px] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                        My Account
+                        የእኔ መለያ
                     </a>
                     @if(Auth::user()->isAdmin())
                         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] text-accent-dark hover:text-black transition">
                             <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                            Security Dashboard
+                            የደህንነት ዳሽቦርድ
                         </a>
                     @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="flex items-center gap-3 w-full py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition text-left">
                             <svg class="w-[18px] h-[18px] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                            Sign Out
+                            ይውጡ
                         </button>
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition">
                         <svg class="w-[18px] h-[18px] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
-                        Sign In
+                        ይግቡ
                     </a>
                     <a href="{{ route('register') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition">
                         <svg class="w-[18px] h-[18px] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
-                        Create Account
+                        መለያ ይፍጠሩ
                     </a>
                 @endauth
             </nav>
@@ -267,7 +267,7 @@
                         <span class="text-2xl font-extrabold tracking-[-0.04em] uppercase">YeaBneh</span>
                     </a>
                     <p class="text-gray-500 text-[13px] leading-relaxed max-w-xs mb-8">
-                        Premium fitness gear designed for athletes who demand the best. Train anywhere, conquer everything.
+                        ለምርጥ አቋም የሚፈልጉ አትሌቶች የተነሳ ፍራይ የቅርጽ መሳሪያዎች። የትም ሆኑ ይለማመዱ፣ ሁሉንም ያሸንፉ።
                     </p>
                     <div class="flex items-center gap-5">
                         <a href="#" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:bg-white hover:text-brand transition-all duration-300">
@@ -284,42 +284,42 @@
 
                 <!-- Links -->
                 <div class="lg:col-span-2 lg:col-start-6">
-                    <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-5">Shop</h4>
+                    <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-5">ሽያጭ</h4>
                     <ul class="space-y-3 text-[13px] text-gray-400">
-                        <li><a href="{{ route('shop.index') }}" class="hover:text-white transition-colors">All Products</a></li>
-                        <li><a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="hover:text-white transition-colors">Equipment</a></li>
-                        <li><a href="{{ route('shop.index', ['category' => 'apparel']) }}" class="hover:text-white transition-colors">Apparel</a></li>
-                        <li><a href="{{ route('courses.index') }}" class="hover:text-white transition-colors">Courses</a></li>
-                        <li><a href="{{ route('training.index') }}" class="hover:text-white transition-colors">Training</a></li>
-                        <li><a href="{{ route('shop.index', ['clearance' => 1]) }}" class="hover:text-white transition-colors">Sale</a></li>
+                        <li><a href="{{ route('shop.index') }}" class="hover:text-white transition-colors">ሁሉም ምርቶች</a></li>
+                        <li><a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="hover:text-white transition-colors">መሳሪያዎች</a></li>
+                        <li><a href="{{ route('shop.index', ['category' => 'apparel']) }}" class="hover:text-white transition-colors">አልባሶች</a></li>
+                        <li><a href="{{ route('courses.index') }}" class="hover:text-white transition-colors">ኮርሶች</a></li>
+                        <li><a href="{{ route('training.index') }}" class="hover:text-white transition-colors">ስልጠና</a></li>
+                        <li><a href="{{ route('shop.index', ['clearance' => 1]) }}" class="hover:text-white transition-colors">ሽያጭ</a></li>
                     </ul>
                 </div>
 
                 <div class="lg:col-span-2">
-                    <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-5">Company</h4>
+                    <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-5">ኩባንያ</h4>
                     <ul class="space-y-3 text-[13px] text-gray-400">
-                        <li><a href="{{ route('page.show', 'faq') }}" class="hover:text-white transition-colors">FAQ</a></li>
-                        <li><a href="{{ route('page.show', 'contact-us') }}" class="hover:text-white transition-colors">Contact</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Track Order</a></li>
-                        <li><a href="{{ route('page.show', 'return-policy') }}" class="hover:text-white transition-colors">Returns</a></li>
+                        <li><a href="{{ route('page.show', 'faq') }}" class="hover:text-white transition-colors">የተደጋጋሚ ጥያቄ</a></li>
+                        <li><a href="{{ route('page.show', 'contact-us') }}" class="hover:text-white transition-colors">ያግኙን</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">ትዕዛዝ ይከታተሉ</a></li>
+                        <li><a href="{{ route('page.show', 'return-policy') }}" class="hover:text-white transition-colors">መመለሻ</a></li>
                     </ul>
                 </div>
 
                 <div class="lg:col-span-2">
-                    <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-5">Legal</h4>
+                    <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-5">ሕጋዊ</h4>
                     <ul class="space-y-3 text-[13px] text-gray-400">
-                        <li><a href="{{ route('page.show', 'privacy-policy') }}" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="{{ route('page.show', 'terms-and-conditions') }}" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="{{ route('page.show', 'privacy-policy') }}" class="hover:text-white transition-colors">የግላዊነት ፖሊሲ</a></li>
+                        <li><a href="{{ route('page.show', 'terms-and-conditions') }}" class="hover:text-white transition-colors">የአገልግሎት ውሎች</a></li>
                     </ul>
                 </div>
 
                 <!-- Newsletter -->
                 <div class="lg:col-span-3">
-                    <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-5">Stay in the Loop</h4>
-                    <p class="text-[13px] text-gray-500 mb-4">Get early access to new drops, sales, and training tips.</p>
+                    <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-5">በቅርብ ይከተሉን</h4>
+                    <p class="text-[13px] text-gray-500 mb-4">ለአዲስ ምርቶች፣ ሽያጭ እና የስልጠና ምክሮች ቅድመ ተቀባይነት ያግኙ።</p>
                     <form class="flex">
-                        <input type="email" placeholder="Your email" class="flex-1 bg-white/5 border border-white/10 px-4 py-3 text-[13px] text-white placeholder-gray-600 focus:outline-none focus:border-white/30 transition">
-                        <button type="submit" class="bg-white text-brand px-5 py-3 text-[11px] font-bold uppercase tracking-widest hover:bg-accent transition-colors duration-300">Join</button>
+                        <input type="email" placeholder="ኢሜይልዎ" class="flex-1 bg-white/5 border border-white/10 px-4 py-3 text-[13px] text-white placeholder-gray-600 focus:outline-none focus:border-white/30 transition">
+                        <button type="submit" class="bg-white text-brand px-5 py-3 text-[11px] font-bold uppercase tracking-widest hover:bg-accent transition-colors duration-300">ይቀላቀሉ</button>
                     </form>
                 </div>
             </div>
@@ -328,11 +328,11 @@
         <!-- Bottom Bar -->
         <div class="border-t border-white/5">
             <div class="max-w-[1680px] mx-auto px-5 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-[12px] text-gray-600">&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+                <p class="text-[12px] text-gray-600">&copy; {{ date('Y') }} {{ config('app.name') }}. ሁሉም መብቶች የተጠበቁ ናቸው።</p>
                 <div class="flex items-center gap-6">
-                    <a href="#" class="text-[12px] text-gray-600 hover:text-white transition-colors">Privacy</a>
-                    <a href="#" class="text-[12px] text-gray-600 hover:text-white transition-colors">Terms</a>
-                    <a href="#" class="text-[12px] text-gray-600 hover:text-white transition-colors">Cookies</a>
+                    <a href="#" class="text-[12px] text-gray-600 hover:text-white transition-colors">ግላዊነት</a>
+                    <a href="#" class="text-[12px] text-gray-600 hover:text-white transition-colors">ውሎች</a>
+                    <a href="#" class="text-[12px] text-gray-600 hover:text-white transition-colors">ኩኪዎች</a>
                 </div>
             </div>
         </div>
