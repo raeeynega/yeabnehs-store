@@ -1,3 +1,10 @@
+FROM node:20 AS frontend
+WORKDIR /app
+COPY package.json package-lock.json* ./
+RUN npm install
+COPY . .
+RUN npm run build
+
 FROM php:8.2-cli
 
 # Install system dependencies
@@ -20,12 +27,12 @@ RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 # Copy the rest of the app
 COPY . .
 
+# Copy built frontend assets from node stage
+COPY --from=frontend /app/public/build /var/www/yeabnehs-store/public/build
+
 # Generate autoloader and optimize
 RUN composer dump-autoload --optimize \
     && composer install --no-dev --optimize-autoloader
-
-# Build frontend assets
-RUN npm install && npm run build
 
 # Storage permissions
 RUN mkdir -p storage/framework/{cache,sessions,testing,views} \
@@ -35,4 +42,4 @@ RUN mkdir -p storage/framework/{cache,sessions,testing,views} \
 
 EXPOSE 8000
 
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD php artisan migrate --force; php artisan serve --host=0.0.0.0 --port=8000
