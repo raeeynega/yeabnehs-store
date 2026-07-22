@@ -4,11 +4,13 @@ namespace App\Services;
 
 use App\Models\AuditLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ImmutableAuditLogger
 {
     /**
      * Append an entry to the immutable audit chain.
+     * Uses SELECT FOR UPDATE inside a transaction to prevent race conditions.
      * Every entry is SHA-256 hashed with the previous entry's hash,
      * forming a tamper-evident blockchain-style chain.
      */
@@ -20,33 +22,54 @@ class ImmutableAuditLogger
         ?array $newValues = null,
         ?string $riskLevel = 'low',
         ?Request $request = null,
-    ): AuditLog {
-        $lastEntry = AuditLog::orderByDesc('chain_index')->first();
+    ): ?AuditLog {
+        // Skip during migrations/seeding to prevent conflicts
+        if (app()->runningInConsole() || app()->runningArtisan()) {
+            return null;
+        }
 
-        $entry = new AuditLog();
-        $entry->chain_index   = $lastEntry ? $lastEntry->chain_index + 1 : 0;
-        $entry->timestamp     = now();
-        $entry->user_id       = auth()->id();
-        $entry->action        = $action;
-        $entry->entity_type   = $entityType;
-        $entry->entity_id     = $entityId;
-        $entry->old_values    = $oldValues;
-        $entry->new_values    = $newValues;
-        $entry->ip_address    = $request?->ip() ?? request()->ip();
-        $entry->user_agent    = $request?->userAgent() ?? request()->userAgent();
-        $entry->request_url   = $request?->url() ?? request()->url();
-        $entry->request_method = $request?->method() ?? request()->method();
-        $entry->risk_level    = $riskLevel;
-        $entry->previous_hash = $lastEntry?->chain_hash ?? str_repeat('0', 64);
-        $entry->chain_hash    = $entry->computeHash();
-        $entry->save();
+        // Skip if audit_logs table doesn't exist yet (during first migration)
+        if (!DB::getSchemaBuilder()->hasTable('audit_logs')) {
+            return null;
+        }
 
-        return $entry;
+        try {
+            return DB::transaction(function () use ($action, $entityType, $entityId, $oldValues, $newValues, $riskLevel, $request) {
+                // Lock the last row to serialize chain appends
+                $lastEntry = DB::select('SELECT * FROM audit_logs ORDER BY chain_index DESC LIMIT 1 FOR UPDATE');
+
+                $prevIndex = !empty($lastEntry) ? $lastEntry[0]->chain_index : -1;
+                $prevHash  = !empty($lastEntry) ? $lastEntry[0]->chain_hash : str_repeat('0', 64);
+
+                $entry = new AuditLog();
+                $entry->chain_index    = $prevIndex + 1;
+                $entry->timestamp      = now();
+                $entry->user_id        = auth()->id();
+                $entry->action         = $action;
+                $entry->entity_type    = $entityType;
+                $entry->entity_id      = $entityId;
+                $entry->old_values     = $oldValues;
+                $entry->new_values     = $newValues;
+                $entry->ip_address     = $request?->ip() ?? request()->ip();
+                $entry->user_agent     = $request?->userAgent() ?? request()->userAgent();
+                $entry->request_url    = $request?->url() ?? request()->url();
+                $entry->request_method = $request?->method() ?? request()->method();
+                $entry->risk_level     = $riskLevel;
+                $entry->previous_hash  = $prevHash;
+                $entry->chain_hash     = $entry->computeHash();
+                $entry->save();
+
+                return $entry;
+            }, 5); // 5 retries on deadlock
+        } catch (\Throwable $e) {
+            // Never let audit logging break the application
+            report($e);
+            return null;
+        }
     }
 
     /**
      * Verify the entire chain integrity from a given index.
-     * Returns [valid: bool, brokenAt: ?int, errors: array].
      */
     public static function verifyChain(int $startIndex = 0): array
     {
@@ -60,13 +83,11 @@ class ImmutableAuditLogger
             : str_repeat('0', 64);
 
         foreach ($entries as $entry) {
-            // Check previous_hash link
             if ($entry->previous_hash !== $prevHash) {
                 $errors[] = "Chain break at index {$entry->chain_index}: previous_hash mismatch";
                 return ['valid' => false, 'brokenAt' => $entry->chain_index, 'errors' => $errors];
             }
 
-            // Recompute and verify hash
             $expectedHash = $entry->computeHash();
             if ($entry->chain_hash !== $expectedHash) {
                 $errors[] = "Tampering detected at index {$entry->chain_index}: hash mismatch";
@@ -88,10 +109,10 @@ class ImmutableAuditLogger
         $latest = AuditLog::orderByDesc('chain_index')->first();
 
         return [
-            'total_entries'  => $total,
-            'latest_index'   => $latest?->chain_index ?? -1,
-            'latest_hash'    => $latest?->chain_hash ?? 'N/A',
-            'latest_time'    => $latest?->timestamp?->toIso8601String() ?? 'N/A',
+            'total_entries'   => $total,
+            'latest_index'    => $latest?->chain_index ?? -1,
+            'latest_hash'     => $latest?->chain_hash ?? 'N/A',
+            'latest_time'     => $latest?->timestamp?->toIso8601String() ?? 'N/A',
             'chain_integrity' => $total > 0 ? self::verifyChain()->valid : true,
         ];
     }
