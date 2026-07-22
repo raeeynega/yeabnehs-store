@@ -14,10 +14,16 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'zero.trust' => \App\Http\Middleware\ZeroTrust::class,
             'admin' => \App\Http\Middleware\AdminOnly::class,
+            'security.headers' => \App\Http\Middleware\SecurityHeaders::class,
+            'rate.limit' => \App\Http\Middleware\RateLimiter::class,
+            'audit' => \App\Http\Middleware\ImmutableAuditMiddleware::class,
         ]);
         $middleware->web(append: [
+            \App\Http\Middleware\SecurityHeaders::class,
+            \App\Http\Middleware\RateLimiter::class,
             \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\ZeroTrust::class,
+            \App\Http\Middleware\ImmutableAuditMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

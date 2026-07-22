@@ -23,7 +23,7 @@ APP_NAME="${APP_NAME:-YeaBneh Store}"
 APP_ENV=${APP_ENV:-production}
 APP_KEY=${APP_KEY}
 APP_DEBUG=${APP_DEBUG:-false}
-APP_URL=${APP_URL:-http://localhost:8000}
+APP_URL=${APP_URL:-http://localhost}
 APP_LOCALE=en
 APP_FALLBACK_LOCALE=en
 APP_FAKER_LOCALE=en_US
@@ -32,7 +32,7 @@ BCRYPT_ROUNDS=12
 LOG_CHANNEL=${LOG_CHANNEL:-stack}
 LOG_STACK=single
 LOG_DEPRECATIONS_CHANNEL=null
-LOG_LEVEL=debug
+LOG_LEVEL=error
 DB_CONNECTION=${DB_CONNECTION:-pgsql}
 DB_HOST=${DB_HOST:-127.0.0.1}
 DB_PORT=${DB_PORT:-5432}
@@ -41,9 +41,11 @@ DB_USERNAME=${DB_USERNAME:-root}
 DB_PASSWORD=${DB_PASSWORD:-}
 SESSION_DRIVER=${SESSION_DRIVER:-database}
 SESSION_LIFETIME=120
-SESSION_ENCRYPT=false
+SESSION_ENCRYPT=true
 SESSION_PATH=/
 SESSION_DOMAIN=null
+SESSION_SECURE_COOKIE=true
+SESSION_HTTP_ONLY=true
 BROADCAST_CONNECTION=log
 FILESYSTEM_DISK=local
 QUEUE_CONNECTION=${QUEUE_CONNECTION:-database}
@@ -67,10 +69,19 @@ php artisan migrate --force 2>&1 || echo "Migration failed, continuing..."
 # Seed database
 php artisan db:seed --force 2>&1 || echo "Seed failed, continuing..."
 
+# Obfuscate translations (two-step: gzip+base64, xor+base64)
+php artisan translations:obfuscate 2>&1 || echo "Obfuscation failed, continuing..."
+
 # Cache config
 php artisan config:cache 2>&1 || true
 php artisan route:cache 2>&1 || true
 php artisan view:cache 2>&1 || true
 
-# Start the server
-exec php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+# Verify audit chain integrity on startup (ISO 27001 A.12.4.1)
+php artisan audit:verify --stats 2>&1 || echo "Audit chain verification skipped"
+
+# Create log directories for supervisor
+mkdir -p /var/log/supervisor
+
+# Start PHP-FPM + Nginx via supervisor (entrypoint.sh is no longer the CMD)
+exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
