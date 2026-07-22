@@ -3,6 +3,20 @@ set -e
 
 cd /var/www/yeabnehs-store
 
+# Parse DATABASE_URL into individual DB_* vars if it's set and individual vars aren't
+if [ -n "$DATABASE_URL" ] && [ -z "$DB_HOST" ]; then
+  eval "$(php -r "
+    \$url = parse_url(getenv('DATABASE_URL'));
+    if (\$url) {
+      echo 'export DB_HOST=' . (\$url['host'] ?? '127.0.0.1') . PHP_EOL;
+      echo 'export DB_PORT=' . (\$url['port'] ?? '5432') . PHP_EOL;
+      echo 'export DB_DATABASE=' . ltrim(\$url['path'] ?? '/laravel', '/') . PHP_EOL;
+      echo 'export DB_USERNAME=' . (\$url['user'] ?? 'postgres') . PHP_EOL;
+      echo 'export DB_PASSWORD=' . (\$url['pass'] ?? '') . PHP_EOL;
+    }
+  ")"
+fi
+
 # Create .env from environment variables
 cat > .env <<EOF
 APP_NAME="${APP_NAME:-YeaBneh Store}"
@@ -20,7 +34,11 @@ LOG_STACK=single
 LOG_DEPRECATIONS_CHANNEL=null
 LOG_LEVEL=debug
 DB_CONNECTION=${DB_CONNECTION:-pgsql}
-DATABASE_URL=${DATABASE_URL}
+DB_HOST=${DB_HOST:-127.0.0.1}
+DB_PORT=${DB_PORT:-5432}
+DB_DATABASE=${DB_DATABASE:-laravel}
+DB_USERNAME=${DB_USERNAME:-root}
+DB_PASSWORD=${DB_PASSWORD:-}
 SESSION_DRIVER=${SESSION_DRIVER:-database}
 SESSION_LIFETIME=120
 SESSION_ENCRYPT=false
