@@ -63,6 +63,18 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
                 {{ __('Blocked IPs') }}
             </a>
+
+            <div class="h-px bg-white/10 my-2"></div>
+            <p class="text-[9px] font-bold uppercase tracking-[0.2em] text-white/30 px-4 py-1">Infrastructure</p>
+
+            <a href="{{ route('admin.nginx') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl text-[13px] font-medium hover:bg-white/10 transition {{ request()->routeIs('admin.nginx') ? 'active' : '' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                {{ __('Nginx') }}
+            </a>
+            <a href="{{ route('admin.audit-chain') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl text-[13px] font-medium hover:bg-white/10 transition {{ request()->routeIs('admin.audit-chain') ? 'active' : '' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                {{ __('Audit Chain') }}
+            </a>
         </nav>
 
         <div class="p-4 border-t border-white/10">

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\AuditLog;
 use App\Models\BlockedIp;
 use App\Models\SecurityEvent;
 use App\Models\User;
 use App\Services\ActivityLogger;
+use App\Services\ImmutableAuditLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,16 +57,31 @@ class SecurityController extends Controller
             ->groupBy('event_type')
             ->pluck('total', 'event_type');
 
-        // Recent critical events
+        // Critical events
         $criticalEvents = SecurityEvent::where('resolved', false)
             ->with('user')
             ->latest()
             ->limit(10)
             ->get();
 
+        // Nginx / Infrastructure status
+        $nginxRunning = str_contains(shell_exec('ps aux | grep "[n]ginx" 2>/dev/null') ?? '', 'nginx');
+        $phpFpmRunning = str_contains(shell_exec('ps aux | grep "[p]hp-fpm" 2>/dev/null') ?? '', 'php-fpm');
+        $nginxConfigTest = trim(shell_exec('nginx -t 2>&1') ?? 'unknown');
+        $appPort = env('PORT', '80');
+
+        $infra = [
+            'nginx_running'     => $nginxRunning,
+            'php_fpm_running'   => $phpFpmRunning,
+            'nginx_config_ok'   => str_contains($nginxConfigTest, 'successful'),
+            'nginx_config_error' => str_contains($nginxConfigTest, 'failed') ? $nginxConfigTest : null,
+            'app_port'          => $appPort,
+            'server_name'       => gethostname() ?? 'unknown',
+        ];
+
         return view('admin.dashboard', compact(
             'stats', 'riskBreakdown', 'requestsPerDay',
-            'topIps', 'eventsByType', 'criticalEvents'
+            'topIps', 'eventsByType', 'criticalEvents', 'infra'
         ));
     }
 
@@ -215,5 +232,57 @@ class SecurityController extends Controller
 
         $status = $user->is_active ? 'activated' : 'deactivated';
         return back()->with('success', "User {$user->name} has been {$status}.");
+    }
+
+    public function nginxStatus()
+    {
+        $logs = [
+            'error'   => $this->readLogTail('/var/log/nginx/error.log', 100),
+            'access'  => $this->readLogTail('/var/log/nginx/access.log', 100),
+            'supervisor_nginx'  => $this->readLogTail('/var/log/supervisor/nginx.err.log', 50),
+            'supervisor_php'    => $this->readLogTail('/var/log/supervisor/php-fpm.err.log', 50),
+        ];
+
+        $infra = [
+            'nginx_running'   => str_contains(shell_exec('ps aux | grep "[n]ginx" 2>/dev/null') ?? '', 'nginx'),
+            'php_fpm_running' => str_contains(shell_exec('ps aux | grep "[p]hp-fpm" 2>/dev/null') ?? '', 'php-fpm'),
+            'config_test'     => trim(shell_exec('nginx -t 2>&1') ?? 'unknown'),
+            'config_content'  => file_get_contents('/etc/nginx/conf.d/default.conf') ?: 'NOT FOUND',
+            'processes'       => shell_exec('ps aux | grep -E "[n]ginx|[p]hp-fpm" 2>/dev/null') ?? 'none',
+            'ports'           => shell_exec('ss -tlnp 2>/dev/null || netstat -tlnp 2>/dev/null') ?? 'unknown',
+            'port'            => env('PORT', '80'),
+            'hostname'        => gethostname() ?? 'unknown',
+        ];
+
+        return view('admin.nginx', compact('logs', 'infra'));
+    }
+
+    public function auditChain()
+    {
+        $stats = ImmutableAuditLogger::chainStats();
+        $recentEntries = AuditLog::orderByDesc('chain_index')->limit(50)->get();
+
+        $verifyResult = null;
+        if (request()->has('verify')) {
+            $verifyResult = ImmutableAuditLogger::verifyChain();
+        }
+
+        return view('admin.audit-chain', compact('stats', 'recentEntries', 'verifyResult'));
+    }
+
+    private function readLogTail(string $path, int $lines): string
+    {
+        if (!file_exists($path)) {
+            return "[file not found: {$path}]";
+        }
+
+        $content = file_get_contents($path);
+        if ($content === false) {
+            return "[could not read: {$path}]";
+        }
+
+        $allLines = explode("\n", $content);
+        $tail = array_slice($allLines, -$lines);
+        return implode("\n", $tail);
     }
 }

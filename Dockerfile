@@ -38,8 +38,9 @@ COPY --from=frontend /app/public/build /var/www/yeabnehs-store/public/build
 RUN composer dump-autoload --optimize \
     && composer install --no-dev --optimize-autoloader
 
-# --- Nginx config (template — generated at runtime with $PORT) ---
+# --- Nginx config (http-level in nginx.conf, server-level templated) ---
 RUN rm -f /etc/nginx/sites-enabled/default
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/default.conf.template /var/www/yeabnehs-store/nginx/default.conf.template
 
 # --- PHP-FPM pool tuning (production) ---

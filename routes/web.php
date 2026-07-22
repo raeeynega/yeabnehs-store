@@ -85,6 +85,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/blocked-ips', [SecurityController::class, 'blockedIps'])->name('blocked-ips');
     Route::post('/blocked-ips', [SecurityController::class, 'blockIp'])->name('block-ip');
     Route::delete('/blocked-ips/{ip}', [SecurityController::class, 'unblockIp'])->name('unblock-ip');
+    Route::get('/nginx', [SecurityController::class, 'nginxStatus'])->name('nginx');
+    Route::get('/audit-chain', [SecurityController::class, 'auditChain'])->name('audit-chain');
 });
 
 // Pages

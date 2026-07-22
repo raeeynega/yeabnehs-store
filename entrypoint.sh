@@ -82,8 +82,17 @@ php artisan audit:verify --stats 2>&1 || echo "Audit chain verification skipped"
 
 # Generate Nginx config from template (inject $PORT from Render)
 export PORT="${PORT:-80}"
-envsubst '${PORT}' < /var/www/yeabnehs-store/nginx/default.conf.template > /etc/nginx/conf.d/default.conf
-echo "Nginx listening on port ${PORT}"
+if command -v envsubst >/dev/null 2>&1; then
+    envsubst '${PORT}' < /var/www/yeabnehs-store/nginx/default.conf.template > /etc/nginx/conf.d/default.conf
+    echo "Nginx config generated: listening on port ${PORT}"
+else
+    # Fallback: sed-based substitution
+    sed "s/\${PORT}/${PORT}/g" /var/www/yeabnehs-store/nginx/default.conf.template > /etc/nginx/conf.d/default.conf
+    echo "Nginx config generated (sed fallback): listening on port ${PORT}"
+fi
+
+# Validate Nginx config before starting
+nginx -t 2>&1 || { echo "FATAL: Nginx config test failed"; cat /etc/nginx/conf.d/default.conf; exit 1; }
 
 # Create log directories for supervisor
 mkdir -p /var/log/supervisor

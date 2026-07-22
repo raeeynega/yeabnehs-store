@@ -284,5 +284,13 @@
     "YeaBneh Store": "YeaBneh Store",
     "YeaBneh Training": "YeaBneh Training",
     "Security Overview": "Security Overview",
-    "Shop": "Shop"
+    "Shop": "Shop",
+    "Nginx": "Nginx",
+    "Audit Chain": "Audit Chain",
+    "Total Entries": "Total Entries",
+    "Latest Index": "Latest Index",
+    "Latest Hash": "Latest Hash",
+    "Chain Integrity": "Chain Integrity",
+    "Verify Chain Integrity": "Verify Chain Integrity",
+    "Recent Audit Entries": "Recent Audit Entries"
 }
