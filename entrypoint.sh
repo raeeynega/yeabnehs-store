@@ -80,8 +80,13 @@ php artisan view:cache 2>&1 || true
 # Verify audit chain integrity on startup (ISO 27001 A.12.4.1)
 php artisan audit:verify --stats 2>&1 || echo "Audit chain verification skipped"
 
+# Generate Nginx config from template (inject $PORT from Render)
+export PORT="${PORT:-80}"
+envsubst '${PORT}' < /var/www/yeabnehs-store/nginx/default.conf.template > /etc/nginx/conf.d/default.conf
+echo "Nginx listening on port ${PORT}"
+
 # Create log directories for supervisor
 mkdir -p /var/log/supervisor
 
-# Start PHP-FPM + Nginx via supervisor (entrypoint.sh is no longer the CMD)
+# Start PHP-FPM + Nginx via supervisor
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

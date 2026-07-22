@@ -12,6 +12,7 @@ FROM php:8.2-fpm-bookworm
 # Install Nginx + system deps
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
+    gettext-base \
     git curl zip unzip libpng-dev libjpeg-dev libfreetype6-dev \
     libonig-dev libxml2-dev libpq-dev libzip-dev supervisor \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -37,9 +38,9 @@ COPY --from=frontend /app/public/build /var/www/yeabnehs-store/public/build
 RUN composer dump-autoload --optimize \
     && composer install --no-dev --optimize-autoloader
 
-# --- Nginx config ---
-RUN rm /etc/nginx/sites-enabled/default
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+# --- Nginx config (template — generated at runtime with $PORT) ---
+RUN rm -f /etc/nginx/sites-enabled/default
+COPY nginx/default.conf.template /var/www/yeabnehs-store/nginx/default.conf.template
 
 # --- PHP-FPM pool tuning (production) ---
 RUN echo "pm = dynamic" >> /usr/local/etc/php-fpm.d/www.conf \

@@ -1,0 +1,103 @@
+server {
+    listen ${PORT};
+    server_name _;
+
+    root /var/www/yeabnehs-store/public;
+    index index.php index.html;
+
+    # --- Security Headers (OWASP + ISO 27001) ---
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" always;
+    add_header X-Request-ID "$request_id" always;
+
+    # --- Hide server identity (ISO 27001 A.12.4.1) ---
+    server_tokens off;
+    proxy_hide_header X-Powered-By;
+    fastcgi_hide_header X-Powered-By;
+
+    # --- Rate Limiting (OWASP A05:2021) ---
+    limit_req_zone $binary_remote_addr zone=general:10m rate=10r/s;
+    limit_req_zone $binary_remote_addr zone=auth:10m rate=5r/m;
+    limit_req_zone $binary_remote_addr zone=checkout:10m rate=10m;
+    limit_conn_zone $binary_remote_addr zone=addr:10m;
+
+    limit_req_status 429;
+    limit_conn_status 429;
+
+    # --- Performance ---
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    client_max_body_size 20M;
+    client_body_buffer_size 128k;
+    client_header_buffer_size 1k;
+    large_client_header_buffers 4 8k;
+
+    # --- Gzip ---
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_min_length 256;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+
+    # --- Health Check ---
+    location /up {
+        access_log off;
+        add_header Content-Type text/plain;
+        return 200 "OK\n";
+    }
+
+    # --- Block attack vectors (OWASP A01-A10) ---
+    location = /xmlrpc.php { deny all; }
+    location ~ /\. { deny all; }
+    location ~* \.(env|git|svn) { deny all; }
+    location ~* ^/(storage|bootstrap/cache)/.*\.php$ { deny all; }
+
+    # --- Static assets (immutable cache) ---
+    location ~* \.(css|js|ico|gif|jpeg|jpg|png|woff|woff2|ttf|eot|svg|webp|avif)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        add_header X-Content-Type-Options "nosniff" always;
+        try_files $uri =404;
+    }
+
+    # --- Auth endpoints: strict rate limit ---
+    location ~ ^/(login|register)$ {
+        limit_req zone=auth burst=3 nodelay;
+        limit_conn addr 10;
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # --- Checkout/Payment: moderate rate limit ---
+    location ~ ^/(checkout|pay|order) {
+        limit_req zone=checkout burst=5 nodelay;
+        limit_conn addr 20;
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # --- Laravel routes ---
+    location / {
+        limit_req zone=general burst=20 nodelay;
+        limit_conn addr 50;
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # --- PHP-FPM ---
+    location ~ \.php$ {
+        fastcgi_pass unix:/run/php-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_index index.php;
+        fastcgi_buffer_size 128k;
+        fastcgi_buffers 4 256k;
+        fastcgi_busy_buffers_size 256k;
+        fastcgi_param HTTP_PROXY "";
+    }
+}
