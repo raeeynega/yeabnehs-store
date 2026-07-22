@@ -40,11 +40,7 @@ php artisan serve
 
 Visit `http://localhost:8000`
 
-### Admin Login
 
-- **Email:** admin@yeabnehsstore.com
-- **Password:** password
-- **Dashboard:** http://localhost:8000/admin
 
 ## OAuth Setup (Optional)
 
