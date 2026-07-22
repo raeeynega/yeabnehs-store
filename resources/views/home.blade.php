@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'YeaBneh Store - Premium Fitness Gear')
+@section('title', __('YeaBneh Store - Premium Fitness Gear'))
 
 @section('content')
 
@@ -13,19 +13,17 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10 relative">
         <div class="min-h-[80vh] flex items-center py-20">
             <div class="max-w-3xl">
-                <p class="text-accent text-[11px] font-bold uppercase tracking-[0.3em] mb-6 fade-up">YeaBneh መሳሪያዎች</p>
+                <p class="text-accent text-[11px] font-bold uppercase tracking-[0.3em] mb-6 fade-up">{{ __('YeaBneh Equipment') }}</p>
                 <h1 class="text-5xl sm:text-6xl lg:text-[5.5rem] font-extrabold text-white leading-[0.95] tracking-[-0.03em] uppercase mb-8 fade-up">
-                    አዲስ ቅርጽ.<br>
-                    <span class="text-accent">ተጨማሪ ኃይል.</span><br>
-                    ተጨማሪ ቁርጠኝነት.
+                    {{ __('New Shape. More Power. Extra Stamina.') }}
                 </h1>
-                <p class="text-gray-400 text-lg font-light mb-10 max-w-lg fade-up-delay">ሁሉም በእርስዎ እጅ። ለደረጃ የሚቀጥጡ አትሌቶች የተነሳ ፍራይ መሳሪያ።</p>
+                <p class="text-gray-400 text-lg font-light mb-10 max-w-lg fade-up-delay">{{ __('Everything in your hands. Elite calisthenics gear for athletes who level up.') }}</p>
                 <div class="flex flex-wrap gap-4 fade-up-delay-2">
                     <a href="{{ route('shop.index') }}" class="btn-accent px-10 py-4 text-[12px] font-bold uppercase tracking-[0.15em]">
-                        አሁን ይግዙ
+                        {{ __('Shop Now') }}
                     </a>
                     <a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="border border-white/20 text-white px-10 py-4 text-[12px] font-bold uppercase tracking-[0.15em] hover:bg-white hover:text-brand transition-all duration-300">
-                        Equipment
+                        {{ __('Equipment') }}
                     </a>
                 </div>
             </div>
@@ -37,17 +35,17 @@
 <div class="bg-brand text-white overflow-hidden border-y border-white/5">
     <div class="py-4">
         <div class="animate-marquee whitespace-nowrap inline-block text-[11px] font-semibold uppercase tracking-[0.25em]">
-            <span class="mx-10 text-white/40">ለአፈፃፀም የተሰራ</span>
+            <span class="mx-10 text-white/40">{{ __('Built for performance') }}</span>
             <span class="mx-10 text-accent">&#9679;</span>
-            <span class="mx-10 text-white/40">ያልተመሳሰለ መሳሪያ ጥራት</span>
+            <span class="mx-10 text-white/40">{{ __('Unmatched equipment quality') }}</span>
             <span class="mx-10 text-accent">&#9679;</span>
-            <span class="mx-10 text-white/40">#1 ዓለም አቀፍ የቅርጽ እንቅስቃሴ</span>
+            <span class="mx-10 text-white/40">{{ __('#1 World-class fitness') }}</span>
             <span class="mx-10 text-accent">&#9679;</span>
-            <span class="mx-10 text-white/40">ለአፈፃፀም የተሰራ</span>
+            <span class="mx-10 text-white/40">{{ __('Built for performance') }}</span>
             <span class="mx-10 text-accent">&#9679;</span>
-            <span class="mx-10 text-white/40">ያልተመሳሰለ መሳሪያ ጥራት</span>
+            <span class="mx-10 text-white/40">{{ __('Unmatched equipment quality') }}</span>
             <span class="mx-10 text-accent">&#9679;</span>
-            <span class="mx-10 text-white/40">#1 ዓለም አቀፍ የቅርጽ እንቅስቃሴ</span>
+            <span class="mx-10 text-white/40">{{ __('#1 World-class fitness') }}</span>
         </div>
     </div>
 </div>
@@ -57,24 +55,24 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <a href="{{ route('shop.index', ['category' => 'apparel']) }}" class="relative group overflow-hidden bg-brand aspect-[16/10]">
-                <img src="https://placehold.co/900x560/1a1a1a/c8ff00?text=Men%27s+Collection" alt="Men's Collection" class="w-full h-full object-cover opacity-70 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700">
+                <img src="https://placehold.co/900x560/1a1a1a/c8ff00?text=Men%27s+Collection" alt="{{ __('Men\'s Collection') }}" class="w-full h-full object-cover opacity-70 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6">
-                    <span class="inline-block bg-accent text-brand px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] group-hover:bg-white transition-colors duration-300">የወንዶች ስብስብ</span>
+                    <span class="inline-block bg-accent text-brand px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] group-hover:bg-white transition-colors duration-300">{{ __('Men\'s Collection') }}</span>
                 </div>
             </a>
             <a href="{{ route('shop.index', ['category' => 'apparel']) }}" class="relative group overflow-hidden bg-brand aspect-[16/10]">
-                <img src="https://placehold.co/900x560/1a1a1a/c8ff00?text=Women%27s+Collection" alt="Women's Collection" class="w-full h-full object-cover opacity-70 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700">
+                <img src="https://placehold.co/900x560/1a1a1a/c8ff00?text=Women%27s+Collection" alt="{{ __('Women\'s Collection') }}" class="w-full h-full object-cover opacity-70 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6">
-                    <span class="inline-block bg-accent text-brand px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] group-hover:bg-white transition-colors duration-300">የሴቶች ስብስብ</span>
+                    <span class="inline-block bg-accent text-brand px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] group-hover:bg-white transition-colors duration-300">{{ __('Women\'s Collection') }}</span>
                 </div>
             </a>
             <a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="relative group overflow-hidden bg-brand aspect-[16/10] sm:col-span-2 lg:col-span-1">
-                <img src="https://placehold.co/900x560/1a1a1a/c8ff00?text=Elite+Equipment" alt="Equipment" class="w-full h-full object-cover opacity-70 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700">
+                <img src="https://placehold.co/900x560/1a1a1a/c8ff00?text=Elite+Equipment" alt="{{ __('Elite Equipment') }}" class="w-full h-full object-cover opacity-70 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6">
-                    <span class="inline-block bg-accent text-brand px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] group-hover:bg-white transition-colors duration-300">ኤሊት መሳሪያዎች</span>
+                    <span class="inline-block bg-accent text-brand px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] group-hover:bg-white transition-colors duration-300">{{ __('Elite Equipment') }}</span>
                 </div>
             </a>
         </div>
@@ -87,11 +85,11 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10">
         <div class="flex items-end justify-between mb-10">
             <div>
-                <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-3">Equipment</p>
-                <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em]">ለከፍተኛ አፈፃፀም ኤሊት መሳሪያዎች</h2>
+                <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-3">{{ __('Equipment') }}</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em]">{{ __('Elite Equipment for Peak Performance') }}</h2>
             </div>
             <a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="hidden lg:inline-block btn-outline px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.15em]">
-                ሁሉንም ይግዙ
+                {{ __('Shop All Equipment') }}
             </a>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5">
@@ -100,7 +98,7 @@
             @endforeach
         </div>
         <div class="mt-10 text-center lg:hidden">
-            <a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="btn-outline inline-block px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.15em]">ሁሉንም መሳሪያዎች ይግዙ</a>
+            <a href="{{ route('shop.index', ['category' => 'equipment']) }}" class="btn-outline inline-block px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.15em]">{{ __('Shop All Equipment') }}</a>
         </div>
     </div>
 </section>
@@ -109,12 +107,12 @@
 <!-- App Download -->
 <section class="py-20 bg-surface">
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10 text-center">
-        <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-3">YeaBneh</p>
-        <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em] mb-4">የእኛን ማህበረሰብ ይቀላቀሉ</h2>
-        <p class="text-gray-500 max-w-md mx-auto mb-10 text-[15px]">በመብራት የሚሰሩ ሚሊዮኖች አትሌቶች። መተግበሪያውን ያውርዱ ጉዞዎን ይጀምሩ።</p>
+        <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-3">{{ __('YeaBneh') }}</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em] mb-4">{{ __('Join Our Community') }}</h2>
+        <p class="text-gray-500 max-w-md mx-auto mb-10 text-[15px]">{{ __('Millions of athletes working in the light. Download the app and start your journey.') }}</p>
         <div class="flex items-center justify-center gap-4">
-            <a href="#" class="btn-primary px-8 py-4 text-[12px] font-bold uppercase tracking-[0.12em] rounded-lg">Google Play</a>
-            <a href="#" class="btn-primary px-8 py-4 text-[12px] font-bold uppercase tracking-[0.12em] rounded-lg">App Store</a>
+            <a href="#" class="btn-primary px-8 py-4 text-[12px] font-bold uppercase tracking-[0.12em] rounded-lg">{{ __('Google Play') }}</a>
+            <a href="#" class="btn-primary px-8 py-4 text-[12px] font-bold uppercase tracking-[0.12em] rounded-lg">{{ __('App Store') }}</a>
         </div>
     </div>
 </section>
@@ -125,8 +123,8 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10">
         <div class="bg-gradient-to-r from-red-600 to-red-500 p-8 lg:p-14 mb-10 relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/3"></div>
-            <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-red-200/70 mb-2">ከ50% በላይ ቅናሽ</p>
-            <h2 class="text-3xl sm:text-4xl font-extrabold uppercase text-white tracking-[-0.02em]">ቅናሽ ይግዙ</h2>
+            <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-red-200/70 mb-2">{{ __('Over 50% Off') }}</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold uppercase text-white tracking-[-0.02em]">{{ __('Shop Clearance') }}</h2>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5">
             @foreach($clearanceProducts as $product)
@@ -134,7 +132,7 @@
             @endforeach
         </div>
         <div class="mt-10 text-center">
-            <a href="{{ route('shop.index', ['clearance' => 1]) }}" class="btn-outline inline-block px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.15em]">ሁሉንም ቅናሽ ይመልከቱ</a>
+            <a href="{{ route('shop.index', ['clearance' => 1]) }}" class="btn-outline inline-block px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.15em]">{{ __('View All Clearance') }}</a>
         </div>
     </div>
 </section>
@@ -146,11 +144,11 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10">
         <div class="flex items-end justify-between mb-10">
             <div>
-                <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-3">አዲስ የወጣ</p>
-                <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em]">አዳዲስ መምጣቶች</h2>
+                <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-3">{{ __('New Arrivals') }}</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em]">{{ __('New Arrivals') }}</h2>
             </div>
             <a href="{{ route('shop.index', ['sort' => 'newest']) }}" class="hidden lg:inline-block btn-outline px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.15em]">
-                ሁሉንም ይመልከቱ
+                {{ __('View All') }}
             </a>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5">

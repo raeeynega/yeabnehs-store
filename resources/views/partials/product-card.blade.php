@@ -7,10 +7,10 @@
             <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider">-{{ $product->discountPercent() }}%</span>
         @endif
         @if($product->is_new)
-            <span class="absolute top-3 right-3 bg-brand text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider">New</span>
+            <span class="absolute top-3 right-3 bg-brand text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider">{{ __('New') }}</span>
         @endif
         @if($product->is_clearance)
-            <span class="absolute top-3 right-3 bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider">Sale</span>
+            <span class="absolute top-3 right-3 bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider">{{ __('Sale') }}</span>
         @endif
 
         <div class="product-overlay absolute inset-0 bg-black/10 transition-opacity duration-300"></div>
@@ -19,7 +19,7 @@
             @csrf
             <input type="hidden" name="slug" value="{{ $product->slug }}">
             <button type="submit" class="w-full bg-brand text-white py-3 text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-accent hover:text-brand transition-all duration-300">
-                Add to Cart
+                {{ __('Add to Cart') }}
             </button>
         </form>
     </a>

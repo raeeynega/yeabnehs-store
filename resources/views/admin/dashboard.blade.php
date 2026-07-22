@@ -1,52 +1,52 @@
 @extends('admin.layout')
-@section('title', 'Security Overview')
-@section('header', 'Security Overview')
+@section('title', __('Security Overview'))
+@section('header', __('Security Overview'))
 
 @section('content')
 <!-- Stats Grid -->
 <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
     <div class="stat-card bg-white border border-gray-100 rounded-xl p-6">
         <div class="flex items-center justify-between mb-3">
-            <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">Total Users</span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">{{ __('Total Users') }}</span>
             <div class="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center">
                 <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
             </div>
         </div>
         <p class="text-3xl font-extrabold">{{ number_format($stats['total_users']) }}</p>
-        <p class="text-[11px] text-gray-400 mt-1">{{ $stats['active_users_24h'] }} active (24h)</p>
+        <p class="text-[11px] text-gray-400 mt-1">{{ $stats['active_users_24h'] }} {{ __('active (24h)') }}</p>
     </div>
 
     <div class="stat-card bg-white border border-gray-100 rounded-xl p-6">
         <div class="flex items-center justify-between mb-3">
-            <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">Requests (24h)</span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">{{ __('Requests (24h)') }}</span>
             <div class="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center">
                 <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
         </div>
         <p class="text-3xl font-extrabold">{{ number_format($stats['total_requests_24h']) }}</p>
-        <p class="text-[11px] text-gray-400 mt-1">All tracked requests</p>
+        <p class="text-[11px] text-gray-400 mt-1">{{ __('All tracked requests') }}</p>
     </div>
 
     <div class="stat-card bg-white border border-gray-100 rounded-xl p-6">
         <div class="flex items-center justify-between mb-3">
-            <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">Failed Logins (24h)</span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">{{ __('Failed Logins (24h)') }}</span>
             <div class="w-9 h-9 rounded-lg bg-gray-900 flex items-center justify-center">
                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             </div>
         </div>
         <p class="text-3xl font-extrabold">{{ number_format($stats['failed_logins_24h']) }}</p>
-        <p class="text-[11px] text-gray-400 mt-1">Authentication attempts</p>
+        <p class="text-[11px] text-gray-400 mt-1">{{ __('Authentication attempts') }}</p>
     </div>
 
     <div class="stat-card bg-white border border-gray-100 rounded-xl p-6">
         <div class="flex items-center justify-between mb-3">
-            <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">Unresolved Events</span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">{{ __('Unresolved Events') }}</span>
             <div class="w-9 h-9 rounded-lg {{ $stats['unresolved_events'] > 0 ? 'bg-gray-900' : 'bg-gray-100' }} flex items-center justify-center">
                 <svg class="w-4 h-4 {{ $stats['unresolved_events'] > 0 ? 'text-white' : 'text-gray-500' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
             </div>
         </div>
         <p class="text-3xl font-extrabold">{{ $stats['unresolved_events'] }}</p>
-        <p class="text-[11px] text-gray-400 mt-1">{{ $stats['blocked_ips'] }} IPs blocked</p>
+        <p class="text-[11px] text-gray-400 mt-1">{{ $stats['blocked_ips'] }} {{ __('IPs blocked') }}</p>
     </div>
 </div>
 
@@ -54,13 +54,13 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-8">
     <!-- Requests Chart -->
     <div class="bg-white border border-gray-100 rounded-xl p-6">
-        <h3 class="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-4">Requests (7 Days)</h3>
+        <h3 class="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-4">{{ __('Requests (7 Days)') }}</h3>
         <canvas id="requestsChart" height="200"></canvas>
     </div>
 
     <!-- Risk Breakdown -->
     <div class="bg-white border border-gray-100 rounded-xl p-6">
-        <h3 class="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-4">Risk Breakdown (7 Days)</h3>
+        <h3 class="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-4">{{ __('Risk Breakdown (7 Days)') }}</h3>
         <canvas id="riskChart" height="200"></canvas>
     </div>
 </div>
@@ -69,21 +69,21 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
     <!-- Top IPs -->
     <div class="bg-white border border-gray-100 rounded-xl p-6">
-        <h3 class="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-4">Top IPs (7 Days)</h3>
+        <h3 class="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-4">{{ __('Top IPs (7 Days)') }}</h3>
         <div class="space-y-3">
             @forelse($topIps as $ip)
                 <div class="flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0">
                     <div>
                         <p class="text-[13px] font-mono font-semibold">{{ $ip->ip_address }}</p>
-                        <p class="text-[11px] text-gray-400">{{ $ip->unique_users }} user(s)</p>
+                        <p class="text-[11px] text-gray-400">{{ $ip->unique_users }} {{ __('users') }}</p>
                     </div>
                     <div class="text-right">
                         <p class="text-[14px] font-bold">{{ number_format($ip->total) }}</p>
-                        <p class="text-[10px] text-gray-400">requests</p>
+                        <p class="text-[10px] text-gray-400">{{ __('requests') }}</p>
                     </div>
                 </div>
             @empty
-                <p class="text-[13px] text-gray-400 py-4 text-center">No data yet</p>
+                <p class="text-[13px] text-gray-400 py-4 text-center">{{ __('No data yet') }}</p>
             @endforelse
         </div>
     </div>
@@ -91,8 +91,8 @@
     <!-- Critical Events -->
     <div class="bg-white border border-gray-100 rounded-xl p-6">
         <div class="flex items-center justify-between mb-4">
-            <h3 class="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-400">Unresolved Security Events</h3>
-            <a href="{{ route('admin.security-events', ['resolved' => 0]) }}" class="text-[11px] font-semibold text-gray-600 hover:underline">View All</a>
+            <h3 class="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-400">{{ __('Unresolved Security Events') }}</h3>
+            <a href="{{ route('admin.security-events', ['resolved' => 0]) }}" class="text-[11px] font-semibold text-gray-600 hover:underline">{{ __('View All Events') }}</a>
         </div>
         <div class="space-y-3">
             @forelse($criticalEvents as $event)
@@ -107,13 +107,13 @@
                     <form method="POST" action="{{ route('admin.resolve-event', $event) }}" class="shrink-0">
                         @csrf
                         @method('PATCH')
-                        <button type="submit" class="text-[10px] font-semibold text-gray-600 hover:underline whitespace-nowrap">Resolve</button>
+                        <button type="submit" class="text-[10px] font-semibold text-gray-600 hover:underline whitespace-nowrap">{{ __('Resolve') }}</button>
                     </form>
                 </div>
             @empty
                 <div class="text-center py-8">
                     <svg class="w-10 h-10 mx-auto text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <p class="text-[13px] text-gray-400">All clear!</p>
+                    <p class="text-[13px] text-gray-400">{{ __('All clear!') }}</p>
                 </div>
             @endforelse
         </div>

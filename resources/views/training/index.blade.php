@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'ሰነፍ ስልጠና - YeaBneh Store')
+@section('title', @lang('Training') . ' - YeaBneh Store')
 
 @section('content')
 
@@ -9,10 +9,10 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10 text-center">
         <p class="text-accent text-[11px] font-bold uppercase tracking-[0.3em] mb-4">YeaBneh Training</p>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-[-0.02em] text-white mb-6">
-            Train With The Best
+            {{ __('Train With The Best') }}
         </h1>
         <p class="text-gray-400 text-lg max-w-xl mx-auto font-light">
-            Personalized fitness coaching tailored to your goals. 1-on-1 sessions, group classes, and online programs available.
+            {{ __('Personalized fitness coaching tailored to your goals. 1-on-1 sessions, group classes, and online programs available.') }}
         </p>
     </div>
 </section>
@@ -25,22 +25,22 @@
                 <div class="w-14 h-14 bg-brand text-white rounded-full flex items-center justify-center mx-auto mb-5">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                 </div>
-                <h3 class="text-sm font-bold uppercase tracking-[0.12em] mb-2">1-on-1 Training</h3>
-                <p class="text-[13px] text-gray-500">Fully personalized sessions focused on your specific goals and skill level.</p>
+                <h3 class="text-sm font-bold uppercase tracking-[0.12em] mb-2">{{ __('1-on-1 Training') }}</h3>
+                <p class="text-[13px] text-gray-500">{{ __('Fully personalized sessions focused on your specific goals and skill level.') }}</p>
             </div>
             <div class="p-8">
                 <div class="w-14 h-14 bg-brand text-white rounded-full flex items-center justify-center mx-auto mb-5">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 </div>
-                <h3 class="text-sm font-bold uppercase tracking-[0.12em] mb-2">Group Classes</h3>
-                <p class="text-[13px] text-gray-500">Train with a community. High-energy group sessions for all levels.</p>
+                <h3 class="text-sm font-bold uppercase tracking-[0.12em] mb-2">{{ __('Group Classes') }}</h3>
+                <p class="text-[13px] text-gray-500">{{ __('Train with a community. High-energy group sessions for all levels.') }}</p>
             </div>
             <div class="p-8">
                 <div class="w-14 h-14 bg-brand text-white rounded-full flex items-center justify-center mx-auto mb-5">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                 </div>
-                <h3 class="text-sm font-bold uppercase tracking-[0.12em] mb-2">Online Coaching</h3>
-                <p class="text-[13px] text-gray-500">Train from anywhere with custom programming and video feedback.</p>
+                <h3 class="text-sm font-bold uppercase tracking-[0.12em] mb-2">{{ __('Online Coaching') }}</h3>
+                <p class="text-[13px] text-gray-500">{{ __('Train from anywhere with custom programming and video feedback.') }}</p>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10">
         @if($programs->count())
             <div class="mb-12">
-                <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em]">ተመዝግቦ ያለዎት ፕሮግራሞች</h2>
+                <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em]">{{ __('Available Programs') }}</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -98,7 +98,7 @@
                                     @endif
                                 </div>
                                 <a href="{{ route('training.show', $program) }}" class="btn-primary px-6 py-3 text-[11px] font-bold uppercase tracking-[0.12em]">
-            አሁን ይያዙ
+            {{ __('Book Now') }}
         </a>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
             </div>
         @else
             <div class="text-center py-24">
-                <p class="text-xl text-gray-400">ስልጠና ፕሮግራሞች በቅርቡ ይመጣሉ።</p>
+                <p class="text-xl text-gray-400">{{ __('Training programs coming soon.') }}</p>
             </div>
         @endif
     </div>

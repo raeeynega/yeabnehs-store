@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'ኮርሶች - YeaBneh Store')
+@section('title', @lang('Courses') . ' - YeaBneh Store')
 
 @section('content')
 
@@ -9,10 +9,10 @@
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10 text-center">
         <p class="text-accent text-[11px] font-bold uppercase tracking-[0.3em] mb-4">YeaBneh Academy</p>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-[-0.02em] text-white mb-6">
-            ስልጠናዎን ያሳழሩ
+            {{ __('Learn') }}
         </h1>
         <p class="text-gray-400 text-lg max-w-xl mx-auto font-light">
-            Structured courses designed to take you from beginner to advanced. Learn proper form, build strength, and unlock skills.
+            {{ __('Structured courses designed to take you from beginner to advanced. Learn proper form, build strength, and unlock skills.') }}
         </p>
     </div>
 </section>
@@ -42,11 +42,11 @@
                             <div class="flex items-center gap-4 text-[12px] text-gray-400 mb-5">
                                 <span class="flex items-center gap-1.5">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                    {{ $course->duration_weeks }} ሳምንታት
+                                    {{ $course->duration_weeks }} {{ __('weeks') }}
                                 </span>
                                 <span class="flex items-center gap-1.5">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
-                                    {{ $course->lessons_count }} ትምህርቶች
+                                    {{ $course->lessons_count }} {{ __('lessons') }}
                                 </span>
                             </div>
                             <div class="flex items-center gap-2">
@@ -61,7 +61,7 @@
             </div>
         @else
             <div class="text-center py-24">
-                <p class="text-xl text-gray-400">ኮርሶች በቅርቡ ይመጣሉ።</p>
+                <p class="text-xl text-gray-400">{{ __('Courses coming soon.') }}</p>
             </div>
         @endif
     </div>

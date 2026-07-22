@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'My Account - YeaBneh Store')
+@section('title', __('My Account') . ' - YeaBneh Store')
 
 @section('content')
 
 <section class="py-16">
     <div class="max-w-[1100px] mx-auto px-5">
         <div class="flex items-center justify-between mb-10">
-            <h1 class="text-3xl lg:text-4xl font-extrabold uppercase tracking-[-0.02em]">የእኔ መለያ</h1>
+            <h1 class="text-3xl lg:text-4xl font-extrabold uppercase tracking-[-0.02em]">{{ __('My Account') }}</h1>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="text-[12px] font-semibold uppercase tracking-[0.12em] text-gray-400 hover:text-red-600 transition-colors">
-                    ይውጡ
+                    {{ __('Sign Out') }}
                 </button>
             </form>
         </div>
@@ -48,10 +48,10 @@
                 </div>
 
                 <nav class="space-y-1">
-                    <a href="#profile" class="block py-3 px-5 text-[13px] font-semibold bg-surface-muted hover:bg-gray-100 transition-colors">ፕሮፋይል</a>
-                    <a href="#orders" class="block py-3 px-5 text-[13px] font-semibold hover:bg-surface-muted transition-colors">ትዕዛዞች</a>
+                    <a href="#profile" class="block py-3 px-5 text-[13px] font-semibold bg-surface-muted hover:bg-gray-100 transition-colors">{{ __('Profile') }}</a>
+                    <a href="#orders" class="block py-3 px-5 text-[13px] font-semibold hover:bg-surface-muted transition-colors">{{ __('Orders') }}</a>
                     @if(!$user->hasPassword())
-                        <a href="#set-password" class="block py-3 px-5 text-[13px] font-semibold hover:bg-surface-muted transition-colors">የይለፍ ቃል ያስቀምጡ</a>
+                        <a href="#set-password" class="block py-3 px-5 text-[13px] font-semibold hover:bg-surface-muted transition-colors">{{ __('Set Password') }}</a>
                     @endif
                 </nav>
             </div>
@@ -60,33 +60,33 @@
             <div class="lg:col-span-2 space-y-10">
                 <!-- Profile -->
                 <div id="profile" class="border border-gray-100 p-7">
-                    <h3 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-6">የፕሮፋይል መረጃ</h3>
+                    <h3 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-6">{{ __('Profile Information') }}</h3>
                     <form method="POST" action="{{ route('account.update') }}">
                         @csrf
                         @method('PUT')
                         <div class="space-y-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">ስም</label>
+                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('Full Name') }}</label>
                                     <input type="text" name="name" value="{{ $user->name }}" required
                                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">ስልክ</label>
+                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('Phone') }}</label>
                                     <input type="text" name="phone" value="{{ $user->phone }}"
                                         placeholder="+251..."
                                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">ኢሜይል</label>
+                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('Email') }}</label>
                                 <input type="email" value="{{ $user->email }}" disabled
                                     class="w-full border border-gray-100 bg-surface-muted px-4 py-3.5 text-[14px] text-gray-400 cursor-not-allowed">
-                                <p class="text-[11px] text-gray-400 mt-1.5">ኢሜይል መቀየር አይችልም</p>
+                                <p class="text-[11px] text-gray-400 mt-1.5">{{ __('Email cannot be changed') }}</p>
                             </div>
                         </div>
                         <button type="submit" class="mt-6 btn-primary px-8 py-3 text-[12px] font-bold uppercase tracking-[0.15em]">
-ፕሮፋይል ያዘምኑ
+{{ __('Update Profile') }}
                         </button>
                     </form>
                 </div>
@@ -95,55 +95,55 @@
             <!-- Password -->
                 @if($user->hasPassword())
                     <div class="border border-gray-100 p-7">
-                        <h3 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-6">የይለፍ ቃል ቀይር</h3>
+                        <h3 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-6">{{ __('Change Password') }}</h3>
                         <form method="POST" action="{{ route('account.password') }}">
                             @csrf
                             @method('PUT')
                             <div class="space-y-5">
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">የአሁኑ የይለፍ ቃል</label>
+                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('Current Password') }}</label>
                                     <input type="password" name="current_password" required
                                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                                     @error('current_password') <p class="text-red-500 text-[12px] mt-1.5">{{ $message }}</p> @enderror
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">አዲስ የይለፍ ቃል</label>
+                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('New Password') }}</label>
                                     <input type="password" name="password" required
                                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                                     @error('password') <p class="text-red-500 text-[12px] mt-1.5">{{ $message }}</p> @enderror
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">የይለፍ ቃል ያረጋግጡ</label>
+                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('Confirm Password') }}</label>
                                     <input type="password" name="password_confirmation" required
                                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                                 </div>
                             </div>
                             <button type="submit" class="mt-6 btn-primary px-8 py-3 text-[12px] font-bold uppercase tracking-[0.15em]">
-                                የይለፍ ቃል ያዘምኑ
+                                {{ __('Update Password') }}
                             </button>
                         </form>
                     </div>
                 @else
                     <div id="set-password" class="border border-gray-100 p-7">
-                        <h3 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-2">የይለፍ ቃል ያስቀምጡ</h3>
-                        <p class="text-[13px] text-gray-500 mb-6">በ {{ ucfirst($user->provider) }} ተመዝገበዋል። የይለፍ ቃል ያስቀምጡ በኢሜይልም ሊያስገቡ ይችላሉ።</p>
+                        <h3 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-2">{{ __('Set a Password') }}</h3>
+                        <p class="text-[13px] text-gray-500 mb-6">{{ __('You signed up via :provider. Set a password so you can also sign in with email.', ['provider' => ucfirst($user->provider)]) }}</p>
                         <form method="POST" action="{{ route('account.set-password') }}">
                             @csrf
                             @method('PUT')
                             <div class="space-y-5">
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">አዲስ የይለፍ ቃል</label>
+                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('New Password') }}</label>
                                     <input type="password" name="password" required
                                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">የይለፍ ቃል ያረጋግጡ</label>
+                                    <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('Confirm Password') }}</label>
                                     <input type="password" name="password_confirmation" required
                                         class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                                 </div>
                             </div>
                             <button type="submit" class="mt-6 btn-primary px-8 py-3 text-[12px] font-bold uppercase tracking-[0.15em]">
-                                የይለፍ ቃል ያስቀምጡ
+                                {{ __('Save Password') }}
                             </button>
                         </form>
                     </div>
@@ -151,7 +151,7 @@
 
                 <!-- Orders -->
                 <div id="orders" class="border border-gray-100 p-7">
-                    <h3 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-6">የቅርብ ትዕዛዞች</h3>
+                    <h3 class="text-[13px] font-bold uppercase tracking-[0.15em] mb-6">{{ __('Recent Orders') }}</h3>
                     @if($orders->isEmpty())
                         <div class="text-center py-10">
                             <p class="text-[14px] text-gray-400 mb-4">ሁለතኔ ትዕዛዞች የሉም</p>

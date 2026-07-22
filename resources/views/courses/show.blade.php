@@ -7,9 +7,9 @@
 <section class="py-12">
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10">
         <nav class="text-[11px] text-gray-400 mb-10 uppercase tracking-[0.15em] font-medium">
-            <a href="{{ route('home') }}" class="hover:text-brand transition">ዋና ገጽ</a>
+            <a href="{{ route('home') }}" class="hover:text-brand transition">{{ __('Home') }}</a>
             <span class="mx-2.5 text-gray-300">/</span>
-            <a href="{{ route('courses.index') }}" class="hover:text-brand transition">ኮርሶች</a>
+            <a href="{{ route('courses.index') }}" class="hover:text-brand transition">{{ __('Courses') }}</a>
             <span class="mx-2.5 text-gray-300">/</span>
             <span class="text-brand">{{ $course->title }}</span>
         </nav>
@@ -28,8 +28,8 @@
 
                 <div class="flex flex-wrap items-center gap-3 mb-6">
                     <span class="text-[10px] font-bold uppercase tracking-[0.15em] px-3 py-1.5 {{ $course->levelColor() }}">{{ $course->level }}</span>
-                    <span class="text-[12px] text-gray-400">{{ $course->duration_weeks }} ሳምንታት</span>
-                    <span class="text-[12px] text-gray-400">{{ $course->lessons_count }} ትምህርቶች</span>
+                    <span class="text-[12px] text-gray-400">{{ $course->duration_weeks }} {{ __('weeks') }}</span>
+                    <span class="text-[12px] text-gray-400">{{ $course->lessons_count }} {{ __('lessons') }}</span>
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-[-0.02em] mb-6">{{ $course->title }}</h1>
@@ -47,7 +47,7 @@
                 <!-- Curriculum -->
                 @if($course->lessons->count())
                     <div class="mt-10">
-                        <h2 class="text-xl font-bold uppercase tracking-[-0.01em] mb-6">ትምህርት ሥርዓት</h2>
+                        <h2 class="text-xl font-bold uppercase tracking-[-0.01em] mb-6">{{ __('Curriculum') }}</h2>
                         <div class="space-y-2">
                             @foreach($course->lessons as $lesson)
                                 <div class="flex items-center gap-4 p-4 border border-gray-100 hover:border-gray-200 transition-colors">
@@ -80,28 +80,28 @@
                         @endif
                     </div>
                     <button class="w-full btn-primary py-4 text-[12px] font-bold uppercase tracking-[0.15em] mb-4">
-                        አሁን ይመዝገቡ
+                        {{ __('Register Now') }}
                     </button>
                     <button class="w-full btn-outline py-4 text-[12px] font-bold uppercase tracking-[0.15em]">
-                        ወደ ጋሪ ያክሉ
+                        {{ __('Add to Cart') }}
                     </button>
 
                     <div class="mt-8 space-y-3.5 text-[13px] text-gray-500">
                         <div class="flex items-center gap-3">
                             <svg class="w-4 h-4 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            {{ $course->duration_weeks }} ሳምንት ፕሮግራም
+                            {{ $course->duration_weeks }} {{ __('weeks program') }}
                         </div>
                         <div class="flex items-center gap-3">
                             <svg class="w-4 h-4 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            {{ $course->lessons_count }} ቪዲዮ ትምህርቶች
+                            {{ $course->lessons_count }} {{ __('video lessons') }}
                         </div>
                         <div class="flex items-center gap-3">
                             <svg class="w-4 h-4 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            የህይወት ዘመን ተደራሽነት
+                            {{ __('Lifetime access') }}
                         </div>
                         <div class="flex items-center gap-3">
                             <svg class="w-4 h-4 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            የማጠቃለያ ማስረክቢያ
+                            {{ __('Completion certificate') }}
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
 
         @if($relatedCourses->count())
             <div class="mt-24">
-                <h2 class="text-2xl font-extrabold uppercase tracking-[-0.02em] mb-10">ተጨማሪ ኮርሶች</h2>
+                <h2 class="text-2xl font-extrabold uppercase tracking-[-0.02em] mb-10">{{ __('More Courses') }}</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     @foreach($relatedCourses as $rc)
                         <a href="{{ route('courses.show', $rc) }}" class="group block border border-gray-100 hover:border-gray-200 transition-all hover:shadow-lg hover:shadow-black/5">

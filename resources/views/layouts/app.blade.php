@@ -126,6 +126,17 @@
 
                 <!-- Right Icons -->
                 <div class="flex items-center gap-5">
+                    <!-- Language Switcher -->
+                    <div class="relative" id="langSwitcher">
+                        <button onclick="document.getElementById('langDropdown').classList.toggle('hidden')" class="hover:opacity-50 transition-opacity duration-200 text-[11px] font-bold uppercase tracking-[0.15em]">
+                            {{ strtoupper(app()->getLocale()) }}
+                        </button>
+                        <div id="langDropdown" class="hidden absolute right-0 top-full mt-2 bg-white border border-gray-100 rounded-xl shadow-xl py-2 min-w-[120px] z-50">
+                            <a href="{{ route('locale.switch', 'am') }}" class="block px-4 py-2 text-[12px] font-medium hover:bg-gray-50 transition {{ app()->getLocale() === 'am' ? 'text-brand font-bold' : 'text-gray-500' }}">አማርኛ</a>
+                            <a href="{{ route('locale.switch', 'om') }}" class="block px-4 py-2 text-[12px] font-medium hover:bg-gray-50 transition {{ app()->getLocale() === 'om' ? 'text-brand font-bold' : 'text-gray-500' }}">Afaan Oromoo</a>
+                            <a href="{{ route('locale.switch', 'en') }}" class="block px-4 py-2 text-[12px] font-medium hover:bg-gray-50 transition {{ app()->getLocale() === 'en' ? 'text-brand font-bold' : 'text-gray-500' }}">English</a>
+                        </div>
+                    </div>
                     <a href="{{ route('shop.index') }}" class="hover:opacity-50 transition-opacity duration-200">
                         <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                     </a>
@@ -206,6 +217,16 @@
                         <span class="ml-auto bg-brand text-white text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">{{ $cartCount }}</span>
                     @endif
                 </a>
+                <div class="h-px bg-gray-100 my-4"></div>
+                <!-- Language Switcher Mobile -->
+                <div class="py-3">
+                    <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-3">Language</p>
+                    <div class="flex gap-2">
+                        <a href="{{ route('locale.switch', 'am') }}" class="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider rounded-lg transition {{ app()->getLocale() === 'am' ? 'bg-brand text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200' }}">አማ</a>
+                        <a href="{{ route('locale.switch', 'om') }}" class="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider rounded-lg transition {{ app()->getLocale() === 'om' ? 'bg-brand text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200' }}">OMO</a>
+                        <a href="{{ route('locale.switch', 'en') }}" class="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider rounded-lg transition {{ app()->getLocale() === 'en' ? 'bg-brand text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200' }}">EN</a>
+                    </div>
+                </div>
                 <div class="h-px bg-gray-100 my-4"></div>
                 @auth
                     <a href="{{ route('account') }}" class="flex items-center gap-3 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] hover:text-gray-500 transition">
@@ -370,6 +391,15 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
                 closeSidebar();
+            }
+        });
+
+        // Close language dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const switcher = document.getElementById('langSwitcher');
+            const dropdown = document.getElementById('langDropdown');
+            if (switcher && dropdown && !switcher.contains(e.target)) {
+                dropdown.classList.add('hidden');
             }
         });
     </script>

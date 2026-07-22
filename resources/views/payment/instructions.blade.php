@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Payment Instructions - YeaBneh Store')
+@section('title', @lang('Payment Instructions') . ' - YeaBneh Store')
 
 @section('content')
 
 <section class="py-16 min-h-[70vh]">
     <div class="max-w-[700px] mx-auto px-5">
         <div class="text-center mb-10">
-            <h1 class="text-3xl lg:text-4xl font-extrabold uppercase tracking-[-0.02em] mb-3">Payment Instructions</h1>
-            <p class="text-gray-500 text-[14px]">Order <strong>{{ $order->order_number }}</strong> &mdash; <strong>ETB {{ number_format($order->total, 2) }}</strong></p>
+            <h1 class="text-3xl lg:text-4xl font-extrabold uppercase tracking-[-0.02em] mb-3">{{ __('Payment Instructions') }}</h1>
+            <p class="text-gray-500 text-[14px]">{{ __('Order') }} <strong>{{ $order->order_number }}</strong> &mdash; <strong>ETB {{ number_format($order->total, 2) }}</strong></p>
         </div>
 
         <!-- Mobile App Launch Banner -->
@@ -19,17 +19,17 @@
                         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
                     </div>
                     <div class="flex-1">
-                        <p class="font-bold text-[15px]">Pay with Telebirr</p>
-                        <p class="text-white/80 text-[12px]">Tap below to open the Telebirr app</p>
+                        <p class="font-bold text-[15px]">{{ __('Pay with Telebirr') }}</p>
+                        <p class="text-white/80 text-[12px]">{{ __('Tap below to open the Telebirr app') }}</p>
                     </div>
                     <a href="telebirr://" id="telebirrLaunch"
                        onclick="launchApp(this, 'telebirr')"
                        class="bg-white text-[#ff6b00] px-5 py-3 rounded-lg text-[12px] font-bold uppercase tracking-wider shrink-0 active:scale-95 transition-transform">
-                        Open App
+                        {{ __('Open App') }}
                     </a>
                 </div>
                 <p id="telebirrFallback" class="hidden text-center mt-2 text-[11px] text-gray-400">
-                    App not installed? <a href="tel:*127%23" class="text-brand font-semibold underline">Dial *127#</a> or pay manually below
+                    {{ __('App not installed?') }} <a href="tel:*127%23" class="text-brand font-semibold underline">{{ __('Dial *127#') }}</a> {{ __('or pay manually below') }}
                 </p>
             @elseif($method === 'cbe')
                 <div class="bg-[#003d7c] text-white p-5 rounded-xl flex items-center gap-4 shadow-lg shadow-[#003d7c]/20">
@@ -37,17 +37,17 @@
                         <span class="text-white font-extrabold text-[16px]">CBE</span>
                     </div>
                     <div class="flex-1">
-                        <p class="font-bold text-[15px]">Pay with CBE Mobile</p>
-                        <p class="text-white/80 text-[12px]">Tap below to open CBE mobile banking</p>
+                        <p class="font-bold text-[15px]">{{ __('Pay with CBE Mobile') }}</p>
+                        <p class="text-white/80 text-[12px]">{{ __('Tap below to open CBE mobile banking') }}</p>
                     </div>
                     <a href="cbeebirr://" id="cbeLaunch"
                        onclick="launchApp(this, 'cbe')"
                        class="bg-white text-[#003d7c] px-5 py-3 rounded-lg text-[12px] font-bold uppercase tracking-wider shrink-0 active:scale-95 transition-transform">
-                        Open App
+                        {{ __('Open App') }}
                     </a>
                 </div>
                 <p id="cbeFallback" class="hidden text-center mt-2 text-[11px] text-gray-400">
-                    App not installed? Pay manually using the account details below
+                    {{ __('App not installed? Pay manually using the account details below') }}
                 </p>
             @endif
         </div>
@@ -60,30 +60,30 @@
                         <span class="text-white font-extrabold text-[18px]">CBE</span>
                     </div>
                     <div>
-                        <h2 class="text-lg font-bold">Bank Transfer - CBE</h2>
-                        <p class="text-[13px] text-gray-500">Transfer the exact amount to the account below</p>
+                        <h2 class="text-lg font-bold">{{ __('Bank Transfer - CBE') }}</h2>
+                        <p class="text-[13px] text-gray-500">{{ __('Transfer the exact amount to the account below') }}</p>
                     </div>
                 </div>
 
                 <div class="space-y-5">
                     <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">Bank Name</span>
+                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">{{ __('Bank Name') }}</span>
                         <span class="text-[14px] font-semibold">{{ $account['bank_name'] }}</span>
                     </div>
                     <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">Account Name</span>
+                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">{{ __('Account Name') }}</span>
                         <span class="text-[14px] font-semibold">{{ $account['account_name'] }}</span>
                     </div>
                     <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">Account Number</span>
+                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">{{ __('Account Number') }}</span>
                         <span class="text-[18px] font-extrabold text-brand bg-accent/20 px-3 py-1 select-all">{{ $account['account_number'] }}</span>
                     </div>
                     <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">Branch</span>
+                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">{{ __('Branch') }}</span>
                         <span class="text-[14px] font-semibold">{{ $account['branch'] }}</span>
                     </div>
                     <div class="flex justify-between items-center py-3">
-                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">Swift Code</span>
+                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">{{ __('Swift Code') }}</span>
                         <span class="text-[14px] font-semibold">{{ $account['swift_code'] }}</span>
                     </div>
                 </div>
@@ -94,53 +94,53 @@
                         <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
                     </div>
                     <div>
-                        <h2 class="text-lg font-bold">Telebirr Mobile Payment</h2>
-                        <p class="text-[13px] text-gray-500">Dial the USSD code or use the Telebirr app</p>
+                        <h2 class="text-lg font-bold">{{ __('Telebirr Mobile Payment') }}</h2>
+                        <p class="text-[13px] text-gray-500">{{ __('Dial the USSD code or use the Telebirr app') }}</p>
                     </div>
                 </div>
 
                 <div class="space-y-5">
                     <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">Service</span>
+                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">{{ __('Service') }}</span>
                         <span class="text-[14px] font-semibold">{{ $account['service_name'] }}</span>
                     </div>
                     <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">Merchant Name</span>
+                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">{{ __('Merchant Name') }}</span>
                         <span class="text-[14px] font-semibold">{{ $account['merchant_name'] }}</span>
                     </div>
                     <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">Phone Number</span>
+                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">{{ __('Phone Number') }}</span>
                         <span class="text-[18px] font-extrabold text-brand bg-accent/20 px-3 py-1 select-all">{{ $account['phone_number'] }}</span>
                     </div>
                     <div class="flex justify-between items-center py-3">
-                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">Merchant Code</span>
+                        <span class="text-[12px] font-bold uppercase tracking-[0.12em] text-gray-400">{{ __('Merchant Code') }}</span>
                         <span class="text-[14px] font-semibold">{{ $account['merchant_code'] }}</span>
                     </div>
                 </div>
 
                 <!-- Telebirr Steps -->
                 <div class="mt-8 p-6 bg-surface-muted">
-                    <h3 class="text-[12px] font-bold uppercase tracking-[0.12em] mb-4">How to Pay via Telebirr</h3>
+                    <h3 class="text-[12px] font-bold uppercase tracking-[0.12em] mb-4">{{ __('How to Pay via Telebirr') }}</h3>
                     <ol class="space-y-3 text-[13px] text-gray-600">
                         <li class="flex gap-3">
                             <span class="w-6 h-6 rounded-full bg-brand text-white flex items-center justify-center text-[11px] font-bold shrink-0">1</span>
-                            <span>Open your Telebirr app or dial <strong><a href="tel:*127%23" class="text-brand underline">*127#</a></strong></span>
+                            <span>{{ __('Open your Telebirr app or dial') }} <strong><a href="tel:*127%23" class="text-brand underline">*127#</a></strong></span>
                         </li>
                         <li class="flex gap-3">
                             <span class="w-6 h-6 rounded-full bg-brand text-white flex items-center justify-center text-[11px] font-bold shrink-0">2</span>
-                            <span>Select <strong>Send Money</strong> or <strong>Pay Merchant</strong></span>
+                            <span>{{ __('Select') }} <strong>{{ __('Send Money') }}</strong> {{ __('or') }} <strong>{{ __('Pay Merchant') }}</strong></span>
                         </li>
                         <li class="flex gap-3">
                             <span class="w-6 h-6 rounded-full bg-brand text-white flex items-center justify-center text-[11px] font-bold shrink-0">3</span>
-                            <span>Enter merchant number: <strong class="select-all">{{ $account['phone_number'] }}</strong></span>
+                            <span>{{ __('Enter merchant number:') }} <strong class="select-all">{{ $account['phone_number'] }}</strong></span>
                         </li>
                         <li class="flex gap-3">
                             <span class="w-6 h-6 rounded-full bg-brand text-white flex items-center justify-center text-[11px] font-bold shrink-0">4</span>
-                            <span>Enter amount: <strong>ETB {{ number_format($order->total, 2) }}</strong></span>
+                            <span>{{ __('Enter amount:') }} <strong>ETB {{ number_format($order->total, 2) }}</strong></span>
                         </li>
                         <li class="flex gap-3">
                             <span class="w-6 h-6 rounded-full bg-brand text-white flex items-center justify-center text-[11px] font-bold shrink-0">5</span>
-                            <span>Enter your Telebirr PIN to confirm</span>
+                            <span>{{ __('Enter your Telebirr PIN to confirm') }}</span>
                         </li>
                     </ol>
                 </div>
@@ -151,11 +151,11 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                     </div>
                     <div class="flex-1">
-                        <p class="font-bold text-[14px]">Quick Pay via USSD</p>
-                        <p class="text-white/60 text-[12px]">Tap to dial directly from your phone</p>
+                        <p class="font-bold text-[14px]">{{ __('Quick Pay via USSD') }}</p>
+                        <p class="text-white/60 text-[12px]">{{ __('Tap to dial directly from your phone') }}</p>
                     </div>
                     <a href="tel:*127%23" class="bg-white text-brand px-5 py-3 rounded-lg text-[12px] font-bold uppercase tracking-wider shrink-0 active:scale-95 transition-transform">
-                        Dial *127#
+                        {{ __('Dial *127#') }}
                     </a>
                 </div>
             @endif
@@ -165,23 +165,23 @@
         <div class="bg-yellow-50 border border-yellow-200 p-5 mb-8 flex items-start gap-3">
             <svg class="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
             <div>
-                <p class="text-[13px] font-semibold text-yellow-800 mb-1">Important</p>
-                <p class="text-[12px] text-yellow-700 leading-relaxed">Please include your order number <strong>{{ $order->order_number }}</strong> as the payment reference/note when making the transfer. This helps us verify your payment quickly.</p>
+                <p class="text-[13px] font-semibold text-yellow-800 mb-1">{{ __('Important') }}</p>
+                <p class="text-[12px] text-yellow-700 leading-relaxed">{{ __('Please include your order number') }} <strong>{{ $order->order_number }}</strong> {{ __('as the payment reference/note when making the transfer. This helps us verify your payment quickly.') }}</p>
             </div>
         </div>
 
         <!-- Amount Summary -->
         <div class="bg-surface-muted p-6 mb-8">
             <div class="flex justify-between items-center">
-                <span class="text-[13px] font-semibold">Total Amount to Pay</span>
+                <span class="text-[13px] font-semibold">{{ __('Total Amount to Pay') }}</span>
                 <span class="text-2xl font-extrabold">ETB {{ number_format($order->total, 2) }}</span>
             </div>
         </div>
 
         <!-- Confirmation Form -->
         <div class="border border-gray-100 p-8">
-            <h2 class="text-lg font-bold mb-2">Confirm Your Payment</h2>
-            <p class="text-[13px] text-gray-500 mb-6">After making the payment, fill in the details below so we can verify your order.</p>
+            <h2 class="text-lg font-bold mb-2">{{ __('Confirm Your Payment') }}</h2>
+            <p class="text-[13px] text-gray-500 mb-6">{{ __('After making the payment, fill in the details below so we can verify your order.') }}</p>
 
             @if($errors->any())
                 <div class="bg-red-50 border border-red-200 p-4 mb-6">
@@ -197,20 +197,20 @@
                 <div class="space-y-5">
                     <div>
                         <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">
-                            {{ $method === 'cbe' ? 'Transaction Reference / Receipt Number' : 'Telebirr Transaction ID' }} *
+                            {{ $method === 'cbe' ? __('Transaction Reference / Receipt Number') : __('Telebirr Transaction ID') }} *
                         </label>
                         <input type="text" name="transaction_ref" value="{{ old('transaction_ref') }}" required
-                            placeholder="{{ $method === 'cbe' ? 'e.g. CBE-20260718-XXXXX or receipt number' : 'e.g. TXN123456789' }}"
+                            placeholder="{{ $method === 'cbe' ? __('e.g. CBE-20260718-XXXXX or receipt number') : __('e.g. TXN123456789') }}"
                             class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Your Full Name *</label>
+                            <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('Your Full Name') }} *</label>
                             <input type="text" name="sender_name" value="{{ old('sender_name') }}" required
                                 class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
                         </div>
                         <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">Your Phone Number *</label>
+                            <label class="block text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-2">{{ __('Your Phone Number') }} *</label>
                             <input type="text" name="sender_phone" value="{{ old('sender_phone', $order->customer_phone) }}" required
                                 placeholder="+251..."
                                 class="w-full border border-gray-200 px-4 py-3.5 text-[14px] focus:outline-none focus:border-brand transition-colors">
@@ -218,7 +218,7 @@
                     </div>
                 </div>
                 <button type="submit" class="w-full mt-8 btn-primary py-4 text-[12px] font-bold uppercase tracking-[0.15em]">
-                    Submit Payment Confirmation
+                    {{ __('Submit Payment Confirmation') }}
                 </button>
             </form>
         </div>

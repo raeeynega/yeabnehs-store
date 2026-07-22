@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Book: ' . $program->title . ' - YeaBneh Training')
+@section('title', __('Booking') . ': ' . $program->title . ' - YeaBneh Training')
 
 @section('content')
 
 <section class="py-16">
     <div class="max-w-2xl mx-auto px-5">
         <nav class="text-[11px] text-gray-400 mb-10 uppercase tracking-[0.15em] font-medium">
-            <a href="{{ route('home') }}" class="hover:text-brand transition">ዋና ገጽ</a>
+            <a href="{{ route('home') }}" class="hover:text-brand transition">{{ __('Home') }}</a>
             <span class="mx-2.5 text-gray-300">/</span>
-            <a href="{{ route('training.index') }}" class="hover:text-brand transition">ስልጠና</a>
+            <a href="{{ route('training.index') }}" class="hover:text-brand transition">{{ __('Training') }}</a>
             <span class="mx-2.5 text-gray-300">/</span>
             <a href="{{ route('training.show', $program) }}" class="hover:text-brand transition">{{ $program->title }}</a>
             <span class="mx-2.5 text-gray-300">/</span>
-            <span class="text-brand">ቦታ ማስያዣ</span>
+            <span class="text-brand">{{ __('Booking') }}</span>
         </nav>
 
         <div class="bg-surface-muted p-8 mb-8 flex items-center gap-5">

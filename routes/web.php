@@ -10,6 +10,16 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\SecurityController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
+// Language Switcher
+Route::get('/locale/{locale}', function (string $locale) {
+    if (in_array($locale, ['en', 'am', 'om'])) {
+        Session::put('locale', $locale);
+        app()->setLocale($locale);
+    }
+    return redirect()->back();
+})->name('locale.switch');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

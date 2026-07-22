@@ -7,9 +7,9 @@
 <section class="py-12">
     <div class="max-w-[1680px] mx-auto px-5 lg:px-10">
         <nav class="text-[11px] text-gray-400 mb-10 uppercase tracking-[0.15em] font-medium">
-            <a href="{{ route('home') }}" class="hover:text-brand transition">ዋና ገጽ</a>
+            <a href="{{ route('home') }}" class="hover:text-brand transition">{{ __('Home') }}</a>
             <span class="mx-2.5 text-gray-300">/</span>
-            <a href="{{ route('training.index') }}" class="hover:text-brand transition">ስልጠና</a>
+            <a href="{{ route('training.index') }}" class="hover:text-brand transition">{{ __('Training') }}</a>
             <span class="mx-2.5 text-gray-300">/</span>
             <span class="text-brand">{{ $program->title }}</span>
         </nav>
@@ -57,7 +57,7 @@
 
                 <!-- Pricing Tiers -->
                 <div class="mb-8">
-                    <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-4">ድግратን ይምረጡ</h3>
+                    <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-4">{{ __('Choose a Tier') }}</h3>
                     <div class="grid grid-cols-2 gap-3">
                         @foreach($program->getPricingTiers() as $tier)
                             <a href="{{ route('training.book', ['program' => $program, 'sessions' => $tier['sessions']]) }}"
@@ -68,7 +68,7 @@
                                 @endif
                                 <p class="text-[13px] font-bold uppercase mb-1">{{ $tier['label'] }}</p>
                                 <p class="text-2xl font-extrabold">${{ number_format($tier['price'], 2) }}</p>
-                                <p class="text-[11px] text-gray-400 mt-1">/ ክፍል</p>
+                                <p class="text-[11px] text-gray-400 mt-1">/ {{ __('session') }}</p>
                             </a>
                         @endforeach
                     </div>
@@ -81,14 +81,14 @@
                 @endif
 
                 <a href="{{ route('training.book', $program) }}" class="btn-primary inline-block px-10 py-4 text-[12px] font-bold uppercase tracking-[0.15em]">
-                    ይህን ፕሮግራም ይያዙ
+                    {{ __('Book Now') }}
                 </a>
             </div>
         </div>
 
         @if($relatedPrograms->count())
             <div class="mt-24">
-                <h2 class="text-2xl font-extrabold uppercase tracking-[-0.02em] mb-10">ሌሎች ፕሮግራሞች</h2>
+                <h2 class="text-2xl font-extrabold uppercase tracking-[-0.02em] mb-10">{{ __('Other Programs') }}</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     @foreach($relatedPrograms as $rp)
                         <a href="{{ route('training.show', $rp) }}" class="group block border border-gray-100 hover:border-gray-200 transition-all hover:shadow-lg hover:shadow-black/5">
@@ -98,7 +98,7 @@
                             <div class="p-5">
                                 <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">{{ $rp->typeLabel() }}</span>
                                 <h3 class="text-[15px] font-bold uppercase mt-1 mb-1">{{ $rp->title }}</h3>
-                                <span class="text-[14px] font-extrabold">From ${{ number_format($rp->price, 2) }}</span>
+                                <span class="text-[14px] font-extrabold">{{ __('From') }} ${{ number_format($rp->price, 2) }}</span>
                             </div>
                         </a>
                     @endforeach
