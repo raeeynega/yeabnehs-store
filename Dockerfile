@@ -80,4 +80,4 @@ RUN mkdir -p storage/audit \
 
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["./entrypoint.sh"]
